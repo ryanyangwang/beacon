@@ -16,14 +16,14 @@ R is a programming language, or the *engine*, but its command-line interface (th
 
 You'd need to install R and RStudio seperatedly and you can follow the video instruction [here]{https://vimeo.com/415501284}
 
-- To download R, you can choose your preferred [CRAN mirror]{https://cran.r-project.org/mirrors.html}(somewhere near your location), or you can choose the [0-cloud option]{https://cloud.r-project.org/}.
-- To download RStudio, you go to Posit's website and follow the instruction based on your operation system (Windows/macOS/Ubuntu) [here]{https://posit.co/download/rstudio-desktop/}
-- If you prefer a cloud version, [Posit's Cloud]{https://posit.cloud/} could be an option but I'd recommend to use a local version. 
+- To download R, you can choose your preferred [CRAN mirror](https://cran.r-project.org/mirrors.html)(somewhere near your location), or you can choose the [0-cloud option](https://cloud.r-project.org/).
+- To download RStudio, you go to Posit's website and follow the instruction based on your operation system (Windows/macOS/Ubuntu) [here](https://posit.co/download/rstudio-desktop/)
+- If you prefer a cloud version, [Posit's Cloud](https://posit.cloud/) could be an option although I'd recommend to use a local version. 
 
 
 # Prepration before our workshop
 
-After installing R and R Studio, whenever you get a chance, take some time to explore and familiarize yourself with R by working through Chapters 1 to 3 in Douglas et al. (2023) [*An Introduction to R*](https://intro2r.com/)! Or yyou can go through the following sections to get a basic understanding of the R language.
+After installing R and R Studio, whenever you get a chance, take some time to explore and familiarize yourself with R by working through Chapters 1 to 3 in Douglas et al. (2023) [*An Introduction to R*](https://intro2r.com/)! Or you can go through the following sections to get a basic understanding of the R language.
 
 ## RStudio Orientation
 
