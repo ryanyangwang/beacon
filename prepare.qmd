@@ -61,7 +61,7 @@ Other examples of markup languages include (compared with Word):
 
 ## R packages
 
-Until Sep 11th, 2023, there are 19861 available packages on [CRAN (The Comprehensive R Archive Network)](https://cran.r-project.org/web/packages/) package repository.
+Until Feb 11th, 2025, there are 22021 available packages on [CRAN (The Comprehensive R Archive Network)](https://cran.r-project.org/web/packages/) package repository.
 
 ```{r}
 # Install packages
