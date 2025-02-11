@@ -1,0 +1,36 @@
+---
+title: "Welcome to Computational Methods Workshop!"
+authors: 
+  - name: Ryan Y. Wang, Ph.D.
+    email: ywang4@lsu.edu
+    affiliation:
+      - name: Manship School of Mass Communication, Louisiana State University
+  - name: Josh Jackson, Ph.D.
+    email: joshuajackson@lsu.edu
+    affiliation:
+      - name: Manship School of Mass Communication, Louisiana State University
+  - name: Jaewon Royce Choi, Ph.D.
+    email: roycechoi@lsu.edu
+    affiliation:
+      - name: Manship School of Mass Communication, Louisiana State University
+---
+
+![Source: reddit.com](image/meme.jpeg){width="50%"}
+
+### Workshop overview
+
+We are excited to announce a series of computational workshops at the Manship School of Mass Communication in Spring 2025, made possible through the collaborative efforts of the **BEACON Lab** led by Drs. [Ryan Wang](https://www.lsu.edu/manship/people/faculty-staff/wang.php) & [Josh Jackson](https://www.lsu.edu/manship/people/faculty-staff/jackson.php) (*Behavioral and Empirical Approaches for COmputational Nexus*) and the **DiCCAL Research Group** led by Drs. [Janice Lee](https://www.lsu.edu/manship/people/faculty-staff/lee.php) & [Royce Choi](https://www.lsu.edu/manship/people/faculty-staff/choi.php) (*Digital Cognition and Computational Analytics Lab*). The BEACON Lab primarily focuses on advancing (computational) methodologies as well as introducing analytical skills. The DiCCAL Research Group emphasizes applying these techniques within the fields of communication and social science.
+
+As part of our mission to foster computational innovation, these intro-level workshops will introduce a range of computational methods tailored to graduate students’ interests. The sessions will provide both foundational training and support for idea and proposal development. Workshops will take place on Feb 14th, Feb 28th, and Mar 21st, with each session lasting around two hours. Sessions will include pre-assigned readings, hands-on practice during the workshop, and follow-up exercises afterward.
+
+### Suggested reading
+
+-   Wickham, H., Çetinkaya-Rundel, M. and Grolemund, G. (2023). [R for Data Science (2e)](https://r4ds.hadley.nz/)
+
+### Spring 2025 Workshop schedule
+
+|        Dates         |       Topics       |
+|:--------------------:|:------------------:|
+| Section 1 (Feb 14th) | Introduction to R  |
+| Section 2 (Feb 28th) | Data visualization |
+| Section 3 (Mar 21st) |        TBD         |

@@ -1,0 +1,27 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "BEACON Workshops"
+  sidebar:
+    #logo: "image/avatar.jpg"
+    style: "docked"
+    search: true
+    contents:
+      - text: "Home"
+        file: index.qmd
+      - text: "Preparation"
+        file: prepare.qmd
+      - text: "Introduction: Feb 14"
+        file: intro.qmd
+      
+        
+format:
+  html:
+    theme: yeti
+    css: styles.css
+    toc: true
+
+editor: visual
+

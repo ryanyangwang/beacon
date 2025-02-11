@@ -1,0 +1,89 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Welcome to Computational Methods Workshop!",
+    "section": "",
+    "text": "Source: reddit.com\n\n\n\nWorkshop overview\nWe are excited to announce a series of computational workshops at the Manship School of Mass Communication in Spring 2025, made possible through the collaborative efforts of the BEACON Lab led by Drs. Ryan Wang & Josh Jackson (Behavioral and Empirical Approaches for COmputational Nexus) and the DiCCAL Research Group led by Drs. Janice Lee & Royce Choi (Digital Cognition and Computational Analytics Lab). The BEACON Lab primarily focuses on advancing (computational) methodologies as well as introducing analytical skills. The DiCCAL Research Group emphasizes applying these techniques within the fields of communication and social science.\nAs part of our mission to foster computational innovation, these intro-level workshops will introduce a range of computational methods tailored to graduate students’ interests. The sessions will provide both foundational training and support for idea and proposal development. Workshops will take place on Feb 14th, Feb 28th, and Mar 21st, with each session lasting around two hours. Sessions will include pre-assigned readings, hands-on practice during the workshop, and follow-up exercises afterward.\n\n\nSuggested reading\n\nWickham, H., Çetinkaya-Rundel, M. and Grolemund, G. (2023). R for Data Science (2e)\n\n\n\nSpring 2025 Workshop schedule\n\n\n\nDates\nTopics\n\n\n\n\nSection 1 (Feb 14th)\nIntroduction to R\n\n\nSection 2 (Feb 28th)\nData visualization\n\n\nSection 3 (Mar 21st)\nTBD",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "prepare.html",
+    "href": "prepare.html",
+    "title": "Preparation before workshop",
+    "section": "",
+    "text": "R is a programming language, or the engine, but its command-line interface (the base R GUI) is not user friendly. That’s why we’d also need RStudio – an integrated development environment (IDE) for R, or the dashboard, which is designed to make working with R easier and more efficient. You are free to use any other IDE for R as well (i.e., VS Code, and etc.).\nYou’d need to install R and RStudio seperatedly and you can follow the video instruction [here]{https://vimeo.com/415501284}\n\nTo download R, you can choose your preferred [CRAN mirror]{https://cran.r-project.org/mirrors.html}(somewhere near your location), or you can choose the [0-cloud option]{https://cloud.r-project.org/}.\nTo download RStudio, you go to Posit’s website and follow the instruction based on your operation system (Windows/macOS/Ubuntu) [here]{https://posit.co/download/rstudio-desktop/}\nIf you prefer a cloud version, [Posit’s Cloud]{https://posit.cloud/} could be an option but I’d recommend to use a local version.",
+    "crumbs": [
+      "Preparation"
+    ]
+  },
+  {
+    "objectID": "prepare.html#rstudio-orientation",
+    "href": "prepare.html#rstudio-orientation",
+    "title": "Preparation before workshop",
+    "section": "RStudio Orientation",
+    "text": "RStudio Orientation\nThere are mainly four panels once you open the IDE (you can modify the theme and the layout under File - Preference - Appearance/Pane layout).\n\nConsole\nEnvironment/History/…\nFiles/Plots/Viewer/…\nSources",
+    "crumbs": [
+      "Preparation"
+    ]
+  },
+  {
+    "objectID": "prepare.html#reproducible-research",
+    "href": "prepare.html#reproducible-research",
+    "title": "Preparation before workshop",
+    "section": "Reproducible research",
+    "text": "Reproducible research\nReproducible: Can someone else reproduce your entire analysis?\n\nAvailable data\nAvailable codes (including the random seed for machine learning)\n\nWe will be mainly using two types of file formats (other related formats such as Rproj and Rdata:\n\nR script (a text file contains the same commands that your would enter on the command line of R)\nRMarkdown\n\nText, code, and results (from your analysis)\nFormatted output: html, pdf (which requires tex, a typesetting system), etc.\nResource: cheatsheet, The Definitive Guide\n\n\nR markdown is a simple and easy to use plain text language used to combine your R code, results from your data analysis (including plots and tables) and written commentary into a single nicely formatted and reproducible document (like a report, publication, thesis chapter or a web page like this one).\n\n\nOther examples of markup languages include (compared with Word):\n\nHTML (HyperText Markup Language): website\nLaTex: Overleaf\nMarkdown (a “lightweight” markup language)",
+    "crumbs": [
+      "Preparation"
+    ]
+  },
+  {
+    "objectID": "prepare.html#r-packages",
+    "href": "prepare.html#r-packages",
+    "title": "Preparation before workshop",
+    "section": "R packages",
+    "text": "R packages\nUntil Sep 11th, 2023, there are 19861 available packages on CRAN (The Comprehensive R Archive Network) package repository.\n\n# Install packages\n## install.packages(\"xxx\") - if on CRAN\n## devtools::install_github(\"houyunhuang/ggcor\") - if only on github\n\n\n# Loading packages\nlibrary(dplyr)\n\n\n# An elegant way to install and load packages by using a loop\n if (!require(dplyr)) {\n    install.packages(\"dplyr\")\n    library(dplyr)\n}\n\n# With multiple packages\nsomepackages &lt;- c(\"dplyr\", \"plyr\", \"magrittr\")\n\nfor (pkg in somepackages) {\n  if (!require(pkg, character.only = TRUE)) {\n    install.packages(pkg)\n    library(pkg,character.only = TRUE)\n  }\n}\n\n\n# Unload packages\ndetach(\"package:dplyr\", unload = TRUE)\n\n# Remove packages\n## remove.packages(\"dplyr\")\n\n\nThe chunk options in R code\nGlobal options: knitr::opts_chunk$set(echo = FALSE)\n\nIn this example, the knitr::opts_chunk$set(echo = FALSE) line in the setup chunk tells R Markdown to hide the R code within code chunks for the entire document, except when overridden within individual code chunks using {r} options. This is often used to create clean and readable reports or documents where you want to present the results of your R code without cluttering the document with the code itself.\n\nOther (individual) chunk options:\n\ninclude = FALSE prevents code and results from appearing in the finished file. R Markdown still runs the code in the chunk, and the results can be used by other chunks.\necho = FALSE prevents code, but not the results from appearing in the finished file. This is a useful way to embed figures.\nmessage = FALSE prevents messages that are generated by code from appearing in the finished file.\nwarning = FALSE prevents warnings that are generated by code from appearing in the finished.\nfig.cap = \"...\" adds a caption to graphical results.\n\n\n\nSome useful packages\n\nData loading\n\nxlsx: read and write Micorsoft Excel files from R\nhaven: enable R to read and write data from SAS, SPSS, and Stata.\n\nData wrangling\n\ntidyverse: a collection of R packages designed for data science that share an underlying design philosophy, grammar, and data structures, for data import, tidying, and visualization listed here.\ndplyr: essential shortcuts for subsetting, summarizing, rearranging, and joining together data sets.\ntidyr: tools for changing the layout of your data sets. Use the gather and spread functions to convert your data into the tidy format, the layout R likes best.\nstringr: easy to learn tools for regular expressions and character strings.\nlubridate: tools that make working with dates and times easier.\nsna / network: a range of tools for social network analysis.\n\nData visualization\n\nggplot2: R’s famous package for making beautiful graphics. ggplot2 lets you use the grammar of graphics to build layered, customizable plots.\nother extension of ggplot2\nigraph: a package for network analysis and visualization\n\nData modeling/analysis\n\ntidymodels: a collection of packages for modeling and machine learning using tidyverse principles\ncaret: tools for classification and regression training\ncar: a hands-on companion to applied regression, especially the anova and vif function.\nlme4: linear and Non-linear mixed effects models\nquanteda: an R package for managing and analyzing text.\nstatnet: a suite of open source R-based software packages for (statistical) network analysis",
+    "crumbs": [
+      "Preparation"
+    ]
+  },
+  {
+    "objectID": "prepare.html#r-basic-operators",
+    "href": "prepare.html#r-basic-operators",
+    "title": "Preparation before workshop",
+    "section": "R basic operators",
+    "text": "R basic operators\n\nArithmetic operators\n\n1 + 19 # addition\n19 - 1 # subtraction\n5 * 4 # multiplication\n10 / 2 # division\n11 %/% 2 # integer division\n41 %% 21 # modulus\n20 ^ 2 # exponents\n20 ** 2\n\n\ndata &lt;- data.frame(x1 = 1:3,  \n                      x2 = 2:4,\n                      x3 = 2)\ndata \n\n\ndata^2\n\n\n\nThe &lt;- operator\nAssignment is a binary operator: the left side is a symbol/variable/object, the right is a value/expression being assigned to the left.\n\nx &lt;- 1\nx &lt;- c(1, 2, 3, 4, 5)\nx &lt;- data.frame(x1 = 1:3,  \n                x2 = 2:4,\n                x3 = 2)\n\n\n\nThe [] operator\nIndexing is a binary operator (two operands: the object being indexed (e.g., a vector, list, or data frame) and the index or indices used to select specific elements from that object. )\n\nx &lt;- c(5, 4, 3, 2, 1)\nx[1] # Extracts the first element\n\n\nx &lt;- data.frame(x1 = 1:3,  \n                x2 = 2:4,\n                x3 = 2)\nx[3] \nx[,3]\nx[3,]\nx[3,2]\nx[\"x3\"]\n\n\n\nThe $ operator\nThe $ operator is used to extract or subset a specific part of a data object in R.\n\nExtract the values in a data frame columns\n\n\ndata &lt;- data.frame(x1 = 1:5,  # Create example data\n                   x2 = letters[1:5],\n                   x3 = 9)\ndata  \n\n\ndata$x2\n\n\nReturn specific list elements\n\n\nmy_list &lt;- list(A = 1:5,  # Create example list\n                B = letters[1:5],\n                C = 9)\nmy_list # Print example list\n\n\nmy_list$B # Extract element of list\n\n\n\nThe () operator\nA function call is also a binary operator as the left side is a symbol pointing to the function argument and the right side are the arguments\n\nmax(1,2)\nx &lt;- max(1,2)\n\n\n\nThe ? operator\n\n?: Search R documentation for a specific term.\n??: Search R help files for a word or phrase.\n\n\n\nThe %&gt;% or |&gt; opertor\n%&gt;% is a longstanding feature of the magrittr package for R. It takes the output of one function and passes it into another function as an argument. This allows us to link a sequence of analysis steps (think about a a conveyor belt in a factory)\n\nReadability and clarity\nEast of modification\nAvoid intermediate variables\n\n\nlibrary(tidyverse)\n?group_by\n?mtcars\nmtcars\n\nx &lt;- filter(mtcars, cyl == 6)\ny &lt;- select(x, c(\"mpg\", \"hp\"))\n\nmtcars |&gt;\n  filter(cyl == 6) |&gt;\n  select(mpg, hp)\n\n\nresult &lt;- mtcars |&gt;\n  group_by(cyl) |&gt;\n  summarise(meanMPG = mean(mpg))\n\n\n\nThe %in% opertor\n%in% is a matching feature to check if the values of the first argument are present in the second argument and returns a logical vector indicating if there is a match or not for its left operand. Here, the first and second arguments can be a value, vector, list, or sequence.\n\n# Check value in a Vector\n67 %in% c(2,5,8,23,67,34)\n45 %in% c(2,5,8,23,67,34)\n\n# Check values from one vector present in another vector\nvec1 &lt;- c(2,5,8,23,67,34)\nvec2 &lt;- c(1,2,8,34) \nvec2 %in% vec1\n\n# Check values in a dataframe\ndf=data.frame(\n  emp_id=c(1,2,3,5),\n  name=c(\"John\",\"Rose\",\"Williams\", \"Ray\"),\n  dept_id=c(10,20,10,50)\n)\n\ndf$dept_state &lt;- if_else(df$dept_id %in% c(10,50),'NY','CA')\ndf\n\n\ndf2 &lt;- df[df$name %in% c('Ray','Rose'), ]\ndf2",
+    "crumbs": [
+      "Preparation"
+    ]
+  },
+  {
+    "objectID": "prepare.html#data-type-in-r",
+    "href": "prepare.html#data-type-in-r",
+    "title": "Preparation before workshop",
+    "section": "Data type in R",
+    "text": "Data type in R\n\n# numeric (double if with more than two decimal numbers)\nx &lt;- 10.5\nclass(x)\n\n# integer\nx &lt;- 1000L\nclass(x)\n\n\n# complex\nx &lt;- 9i + 3\nclass(x)\n\n# character/string\nx &lt;- \"R is exciting\"\nclass(x)\n\n# logical/boolean\nx &lt;- TRUE\nclass(x)\n\n# date\nx = \"01-06-2021\"\nx = as.Date(x, \"%d-%m-%Y\")\nclass(x)\n\n# Factors\n## Factors are the data objects which are used to categorize the data and store it as levels. \n## They can store both strings and integers. They are useful in the columns which have a limited number of unique values. Like Male/Female and True/False, etc. They are useful in data analysis for statistical modeling.\nx &lt;- c(\"East\",\"South\",\"East\",\"North\",\"North\",\"East\",\"West\",\"West\",\"West\",\"South\",\"North\")\nx_factor &lt;- factor(x) ### as.factor\nx_factor2 &lt;- factor(x, levels = c(\"East\", \"West\", \"South\", \"North\"))\nsummary(x_factor)\nsummary(x_factor2)\n\n# Missing values\nx &lt;- c(1, 2, NA, 4)\nis.na(x)\nwhich(is.na(x))\nx_omit &lt;- na.omit(x)\n\n\nNotes on NA\n\nA missing value in a factor variable is displayed as &lt;NA&gt; rather than just NA.\nR has a special value NaN for “not a number.” 0/0 is an example of a calculation that will produce a NaN. NaNs print as NaN, but generally act like NAs.\nAnother special case is Inf, such as log(0)\n\n\n\nExercise\n\nCreate a new R script\nInstall `tidyverse`` package and load it\nCreate a variable called first_num and assign it the value of 70802\nCreate a variable called first_char and assign it the value of my first character\nCreate a vector called gender, including: “male”, “female”, “other”, “female”, “male”, “female”, “female”, “other”, “male”. Make gender as a factor vector, following the order of “female”, “other”, and “male”.",
+    "crumbs": [
+      "Preparation"
+    ]
+  },
+  {
+    "objectID": "intro.html",
+    "href": "intro.html",
+    "title": "Introduction to R",
+    "section": "",
+    "text": "⏰ Time: 9:00 – 11:00 AM, Friday, Feb 14th, 2025\n📍 Location: Curet Room, Hodges Hall\n\n\n\n\nSource: r4ds\n\n\nData wrangling/manipulation is the most important part when we deal with any types of data - before visualization and modeling. We will be mainly following R for Data Science, which includes importing data, transforming data, and “tidying” data.\nTo be continued…",
+    "crumbs": [
+      "Introduction: Feb 14"
+    ]
+  }
+]

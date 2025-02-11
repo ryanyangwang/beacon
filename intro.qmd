@@ -1,0 +1,20 @@
+---
+title: "Introduction to R"
+subtitle: Basic data wrangling and analysis in R
+author:
+  - name: Ryan Y. Wang, Ph.D.
+    email: ywang4@lsu.edu
+    affiliation:
+      - name: Manship School of Mass Communication, Louisiana State University
+execute: 
+  output: false
+---
+
+- ⏰ Time: 9:00 -- 11:00 AM, Friday, Feb 14th, 2025
+- 📍 Location: Curet Room, Hodges Hall
+
+[![Source: r4ds](image/whole_game.png)](https://r4ds.hadley.nz/whole-game)
+
+Data wrangling/manipulation is the most important part when we deal with any types of data - before visualization and modeling. We will be mainly following [*R for Data Science*](https://r4ds.hadley.nz/), which includes importing data, transforming data, and "tidying" data.
+
+To be continued...
