@@ -1,0 +1,72 @@
+---
+title: "BEACON Workshops Series 1"
+subtitle: "Data wrangling: import, tidy and transform"
+date: 2025-02-14
+date-format: long
+author: 
+    - name: "Ryan Y. Wang, Ph.D."
+      email: ywang4@lsu.edu
+      affiliation: Manship School of Mass Communication
+
+format:
+   revealjs:
+    theme: manship.scss
+    logo: image/lsu.png
+    footer: "BEACON Workshops: series 1"
+    date-format: long
+    slide-number: true
+    scrollable: true
+    chalkboard: true
+    src: drawings.json
+    #embed-resources: true
+    include-in-header:
+      - text: |
+          <style>
+          #title-slide .title {
+            font-size: 2em;
+          }
+          </style>
+    title-slide-attributes: 
+      data-background-image: image/manship.png
+      data-background-size: 50%
+      data-background-position: 50% 5%
+---
+
+# OVERVIEW
+
+## **Who are we?**
+This series of computational workshops at the Manship School of Mass Communication is made possible through the collaborative efforts of:
+
+- BEACON Lab led by Drs. Ryan Wang & Josh Jackson (Behavioral and Empirical Approaches for COmputational Nexus): The BEACON Lab primarily focuses on advancing (computational) methodologies as well as introducing analytical skills.
+- DiCCAL Research Group led by Drs. Janice Lee & Royce Choi (Digital Cognition and Computational Analytics Lab).The DiCCAL Research Group emphasizes applying these techniques within the fields of communication and social science.
+
+  - Feb 14: Data wrangling
+  - Feb 28: Data visualization
+  - Mar 21: Basic textual analysis
+
+## **Why R?**
+We will be mainly using R(programming language) and RStudio (Integrated development environment, IDE)}.
+        
+- Open-source with a wide variety of statistics-related libraries
+- Large online community 
+- Great visualization: [Cédric Scherer](https://www.cedricscherer.com/top/dataviz/), [BBC](https://github.com/bbc/bbplot)
+- You can also make website, slides, and etc. beyond coding
+- Popular programming language in tech companies and academia
+  - What about Python?
+
+
+## **Some notes**
+
+- Not trying to pack everything about R in three workshops. But hope to spark your interest in R.
+- There will be a learning curve when transitioning from a graphical user interface (GUI)-oriented software to a syntax-based programming language
+- Consistent practice is key to becoming proficient in a new **language**.
+-  We always here to help! And peer learning is also another great way to gain insights. No dumb questions!
+  - Wickham, H., C ̧ etinkaya-Rundel, M., & Grolemund, G. (2023). [R for data science](https://r4ds.hadley.nz/).
+  - [R-bloggers](https://www.r-bloggers.com/)
+  - [Stack Overflow](https://stackoverflow.com)
+  - (GP)TA: ChatGPT, Claude.ai, Deepseek (In my experience, ChatGPT performs pretty well in providing answers or guidance for any questions related to R language, particularly when employing proper prompts.
+  -   Beyond these workshops: [SICSS](https://sicss.io/)
+
+
+
+# Let's start coding!

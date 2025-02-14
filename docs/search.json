@@ -81,7 +81,179 @@
     "href": "intro.html",
     "title": "Introduction to R",
     "section": "",
-    "text": "⏰ Time: 9:00 – 11:00 AM, Friday, Feb 14th, 2025\n📍 Location: Curet Room, Hodges Hall\n\n\n\n\nSource: r4ds\n\n\nData wrangling/manipulation is the most important part when we deal with any types of data - before visualization and modeling. We will be mainly following R for Data Science, which includes importing data, transforming data, and “tidying” data.\nTo be continued…",
+    "text": "⏰ Time: 9:00 – 11:00 AM, Friday, Feb 14th, 2025\n📍 Location: Journalism Building Room 140\nData wrangling/manipulation is the most important part when we deal with any types of data - before visualization and modeling. We will be mainly following R for Data Science, which includes importing data, transforming data, and tidying data.\nlibrary(tidyverse)\nlibrary(janitor)\nsetwd(\"~/Documents/Teaching/Workshop/beacon\") # good practice to set up your working directory",
+    "crumbs": [
+      "Introduction: Feb 14"
+    ]
+  },
+  {
+    "objectID": "slides/workshop1_slides.html#lazer-et-al.-2009",
+    "href": "slides/workshop1_slides.html#lazer-et-al.-2009",
+    "title": "BEACON Workshops Section 1",
+    "section": "Lazer et al. (2009):",
+    "text": "Lazer et al. (2009):\n\nOpportunities: individual, group, and societal level collected by new technologies and analyzed by new methods\nChallenges:\n\nnew paradigms needed for the massive dataset?\ninstitutional obstacle?\ndata access and privacy issue"
+  },
+  {
+    "objectID": "slides/workshop1_slides.html#hilbert-et-al.-2019",
+    "href": "slides/workshop1_slides.html#hilbert-et-al.-2019",
+    "title": "BEACON Workshops Series 1",
+    "section": "Hilbert et al. (2019)",
+    "text": "Hilbert et al. (2019)\n\nParadigm change?\n\nObservational\nTheoretical research\nExperimental\n\nQuestions:\n\nMore data is good data?\nNew tools but new theories?\nEthical issues?\nResources"
+  },
+  {
+    "objectID": "slides/workshop1_slides.html#aichner-et-al.-2021",
+    "href": "slides/workshop1_slides.html#aichner-et-al.-2021",
+    "title": "BEACON Workshops Series 1",
+    "section": "Aichner et al. (2021)",
+    "text": "Aichner et al. (2021)\n\nWhat is social media – compared to mass media\n\nOnline platform: blogs, business networks, collaborative projects, enterprise social networks, forums, microblogs, photo sharing, products review, social bookmarking, social gaming, SN, video sharing, and virtual worlds.\n\nWhat do social media do?\n\nSocializing/Romance\nInteracting with government/politicians/companies/brands\nJob seeking and professional networking\nBusiness\n\nHow would you define it?"
+  },
+  {
+    "objectID": "slides/workshop1_slides.html#road-map-for-next-two-weeks",
+    "href": "slides/workshop1_slides.html#road-map-for-next-two-weeks",
+    "title": "BEACON Workshops Series 1",
+    "section": "Road map (for next two weeks)",
+    "text": "Road map (for next two weeks)\n\nWhat is Computational Communication Science?\nWhat data is out there?\nHow to utilize the data?"
+  },
+  {
+    "objectID": "slides/workshop1_slides.html#what-is-ccs",
+    "href": "slides/workshop1_slides.html#what-is-ccs",
+    "title": "BEACON Workshops Series 1",
+    "section": "What is CCS?",
+    "text": "What is CCS?\n\nCommunication as a field has put less emphasis on methodologies\n\n\n“…lack of methods for the study of [communication] process and adoption of approaches from other fields”1\n\n\nDefinition of Computational Communication Science (if we ever need one)?\n\n\nAn application of computational science to questions of human and social communication”2\n\nPoole, M. S. (2007). Generalization in process theories of communication. Communication Methods and Measures, 1(3), 181-190.Hilbert, M., Barnett, G., Blumenstock, J., Contractor, N., Diesner, J., Frey, S., … & Zhu, J. J. (2019). Computational communication science: A methodological catalyzer for a maturing discipline. International Journal of Communication, 13, 3912-3934."
+  },
+  {
+    "objectID": "slides/workshop1_slides.html#what-is-ccs-1",
+    "href": "slides/workshop1_slides.html#what-is-ccs-1",
+    "title": "BEACON Workshops Series 1",
+    "section": "What is CCS?",
+    "text": "What is CCS?\n\nA subfield of Computational Social Science 1\n\nlarge and complex data sets;\nconsisting of digital traces and other “naturally occurring” data;\nrequiring algorithmic solutions to analyze;\nallowing the study of human communication by applying and testing communication theory.\n\n\nvan Atteveldt, W., & Peng, T. Q. (2018). When communication meets computation: Opportunities, challenges, and pitfalls in computational communication science. Communication Methods and Measures, 12(2-3), 81-92."
+  },
+  {
+    "objectID": "slides/workshop1_slides.html#what-data-is-out-there-1",
+    "href": "slides/workshop1_slides.html#what-data-is-out-there-1",
+    "title": "BEACON Workshops Series 1",
+    "section": "What data is out there?",
+    "text": "What data is out there?\n\n\nDigital trace / Social media data\n\nAdministrative record\n\nTax records\nSchool records\nPhone call records"
+  },
+  {
+    "objectID": "slides/workshop1_slides.html#what-kinds-of-social-media-data",
+    "href": "slides/workshop1_slides.html#what-kinds-of-social-media-data",
+    "title": "BEACON Workshops Series 1",
+    "section": "What kinds of social media data?",
+    "text": "What kinds of social media data?\n\nTwitter: text & network\nInstagram: image & text\nYoutube: image/video & text"
+  },
+  {
+    "objectID": "slides/workshop1_slides.html#how-can-we-utilize-social-media-data",
+    "href": "slides/workshop1_slides.html#how-can-we-utilize-social-media-data",
+    "title": "BEACON Workshops Series 1",
+    "section": "How can we utilize social media data?",
+    "text": "How can we utilize social media data?\n\nSome applications of machine learning"
+  },
+  {
+    "objectID": "slides/workshop1_slides.html#how-can-we-utilize-social-media-data-1",
+    "href": "slides/workshop1_slides.html#how-can-we-utilize-social-media-data-1",
+    "title": "BEACON Workshops Series 1",
+    "section": "How can we utilize social media data?",
+    "text": "How can we utilize social media data?\n\n\n\n\n\n\n\n\n\n\n\n(a) Unsupervised\n\n\n\n\n\n\n\n\n\n\n\n(b) Supervised\n\n\n\n\n\n\n\nFigure 1: An analogy of unsupervised and supervised machine learning"
+  },
+  {
+    "objectID": "slides/workshop1_slides.html#how-can-we-utilize-social-media-data-2",
+    "href": "slides/workshop1_slides.html#how-can-we-utilize-social-media-data-2",
+    "title": "BEACON Workshops Series 1",
+    "section": "How can we utilize social media data?",
+    "text": "How can we utilize social media data?\n\nMeasurement\n\nAutomatic content analysis\n\nInference\n\nExplanatory modeling\nPredictive modeling"
+  },
+  {
+    "objectID": "slides/workshop1_slides.html#characteristics-of-big-data",
+    "href": "slides/workshop1_slides.html#characteristics-of-big-data",
+    "title": "BEACON Workshops Series 1",
+    "section": "Characteristics of big data",
+    "text": "Characteristics of big data\n\n\nPRO\n\nBIGNESS\nALWAYS-ON\nNONREACTIVE\n\n\nCON\n\nINCOMPLETE\nINACCESSIBLE\nNONREPRESENTATIVE\nDRIFTING\nALGORITHMICALLY CONFOUNDED\nDIRTY AND NOISY\nSENSITIVE (potential harm?)"
+  },
+  {
+    "objectID": "slides/workshop1_slides.html#is-computational-approach-a-one-for-all-solution",
+    "href": "slides/workshop1_slides.html#is-computational-approach-a-one-for-all-solution",
+    "title": "BEACON Workshops Series 1",
+    "section": "IS COMPUTATIONAL APPROACH A ONE-FOR-ALL SOLUTION?",
+    "text": "IS COMPUTATIONAL APPROACH A ONE-FOR-ALL SOLUTION?\nABSOLUTELY NOT!\n\nBig data hubris? “Big” data does not mean “Good” data\nValid and reliable measurement?\n\nValidation matters\n\nInterpretable machine learning?\n\nThe good-for-prediction vs. The good-for-explanation\n\nEthics: the fairness of machine learning\n\nAlgorithmic bias – annotation matters!\nCase: large language models, toxicity detection"
+  },
+  {
+    "objectID": "slides/workshop1_slides.html#who-are-we",
+    "href": "slides/workshop1_slides.html#who-are-we",
+    "title": "BEACON Workshops Series 1",
+    "section": "Who are we?",
+    "text": "Who are we?\nThis series of computational workshops at the Manship School of Mass Communication is made possible through the collaborative efforts of:\n\nBEACON Lab led by Drs. Ryan Wang & Josh Jackson (Behavioral and Empirical Approaches for COmputational Nexus): The BEACON Lab primarily focuses on advancing (computational) methodologies as well as introducing analytical skills.\nDiCCAL Research Group led by Drs. Janice Lee & Royce Choi (Digital Cognition and Computational Analytics Lab).The DiCCAL Research Group emphasizes applying these techniques within the fields of communication and social science.\n\nFeb 14: Data wrangling\nFeb 28: Data visualization\nMar 21: Basic textual analysis"
+  },
+  {
+    "objectID": "slides/workshop1_slides.html#why-r",
+    "href": "slides/workshop1_slides.html#why-r",
+    "title": "BEACON Workshops Series 1",
+    "section": "Why R?",
+    "text": "Why R?\nWe will be mainly using R(programming language) and RStudio (Integrated development environment, IDE)}.\n\nOpen-source with a wide variety of statistics-related libraries\nLarge online community\nGreat visualization: Cédric Scherer, BBC\nYou can also make website, slides, and etc. beyond coding\nPopular programming language in tech companies and academia\n\nWhat about Python?"
+  },
+  {
+    "objectID": "slides/workshop1_slides.html#some-notes",
+    "href": "slides/workshop1_slides.html#some-notes",
+    "title": "BEACON Workshops Series 1",
+    "section": "Some notes",
+    "text": "Some notes\n\nNot trying to pack everything about R in three workshops. But hope to spark your interest in R.\nThere will be a learning curve when transitioning from a graphical user interface (GUI)-oriented software to a syntax-based programming language\nConsistent practice is key to becoming proficient in a new language.\nWe always here to help! And peer learning is also another great way to gain insights. No dumb questions!\nWickham, H., C ̧ etinkaya-Rundel, M., & Grolemund, G. (2023). R for data science.\nR-bloggers\nStack Overflow\n(GP)TA: ChatGPT, Claude.ai, Deepseek (In my experience, ChatGPT performs pretty well in providing answers or guidance for any questions related to R language, particularly when employing proper prompts.\nBeyond these workshops: SICSS"
+  },
+  {
+    "objectID": "intro.html#understanding-data-frame",
+    "href": "intro.html#understanding-data-frame",
+    "title": "Introduction to R",
+    "section": "Understanding data frame",
+    "text": "Understanding data frame\n\nCreate a data frame\n\nheight &lt;- c(180, 155, 160, 167, 181)\nweight &lt;- c(65, 50, 52, 58, 70)\nnames &lt;- c(\"Joanna\", \"Charlotte\", \"Helen\", \"Karen\", \"Amy\")\n\ndata &lt;- data.frame(height = height, weight = weight, names = names) #stringsAsFactors = TRUE\ndata\ndim(data)\nstr(data)\n\n\n\nPositional index\n\ndata[1,3] # the first value (1st row ) of the names variable (3th column)\ndata$names[1]\ndata[1:2, 2:3] #  the first 2 rows and the last 2 columns\ndata[1:2, ]\ndata[, 2:3]\n\n\n\nOrdering data frames\n\nheight_order &lt;- data[order(data$height), ]\nrownames(height_order) &lt;- 1:nrow(height_order)\nheight_order\n\nheight_order &lt;- data[order(data$height, decreasing = T),]\n\n\n\nAdding/Removing columns and rows\n\ndata2 &lt;- data.frame(state = c(\"NY\", \"PA\", \"MD\", \"VA\", \"MA\"))\ndata_newcolumn &lt;- cbind(data, data2)\n\ndata_removecolumn &lt;- data_newcolumn[, c(1:2, 4)]\ndata_newcolumn$state &lt;- NULL\n\ndata3 &lt;- data.frame(height = c(120, 150, 132, 122),\n                    weight = c(44, 56, 49, 45),\n                    names = c(\"Ryan\", \"Chris\", \"Ben\", \"John\"))\ndata_newrow &lt;- rbind(data, data3)\ndata_removerow &lt;- data_newrow[c(1,6:9),]\n\n\n\nMerging data frames\nHere are two fictitious datasets of a clinical trial. One table contains demographic information of the patients and the other one adverse events recorded throughout the course of the trial.\n\ndemographics &lt;- data.frame(\n  id = c(\"P1\", \"P2\", \"P3\"),\n  age = c(40, 54, 47),\n  state = c(\"NY\", \"MA\", \"PA\"),\n  stringsAsFactors = FALSE\n)\n\nadverse_events &lt;- data.frame(\n  id = c(\"P1\", \"P1\", \"P3\", \"P4\"),\n  term = c(\"Headache\", \"Neutropenia\", \"Constipation\", \"Tachycardia\"),\n  onset_date = c(\"2020-12-03\", \"2021-01-03\", \"2020-11-29\", \"2021-01-27\"),\n  stringsAsFactors = FALSE\n)\n\n\nmerge(demographics, adverse_events, by = \"id\")\nmerge(demographics, adverse_events, by = \"id\", all.x = T)\nmerge(demographics, adverse_events, by = \"id\", all.y = T)\nmerge(demographics, adverse_events, by = \"id\", all = T)\n\n\nadverse_events2 &lt;- adverse_events\ncolnames(adverse_events2)[1] &lt;- \"pat_id\"\nmerge(demographics, adverse_events2, by.x = \"id\", by.y = \"pat_id\", all = T)\n\n\n\n\n\n\n\nExercise\n\n\n\n\n\nPlease merge the following two datasets emp_df (employee information)and dept_df (department information) using two ID columns dept_id and dept_branch_id.\n\nemp_df=data.frame(\n  emp_id=c(1,2,3,4,5,6),\n  name=c(\"Chris\",\"Rose\",\"Williams\",\"Jones\",\"Jayden\",\"Xavior\"),\n  superior_emp_id=c(1,1,1,2,2,2),\n  dept_id=c(10,20,10,10,40,30),\n  dept_branch_id= c(101,102,101,101,104,103)\n)\n\ndept_df=data.frame(\n  dept_id=c(10,20,30,40),\n  dept_name=c(\"Finance\",\"Marketing\",\"Sales\",\"IT\"),\n  dept_branch_id= c(101,102,103,104)\n)\n\n\n\nShow the code\nmerge(emp_df, dept_df, by = c(\"dept_id\", \"dept_branch_id\"), all.x = T)",
+    "crumbs": [
+      "Introduction: Feb 14"
+    ]
+  },
+  {
+    "objectID": "intro.html#data-importing-and-exporting",
+    "href": "intro.html#data-importing-and-exporting",
+    "title": "Introduction to R",
+    "section": "Data importing (and exporting)",
+    "text": "Data importing (and exporting)\nCommon data formats:\n\nCSV (comma-seperated values) / TSV (tab-seperated values)\nxlsx\ntxt\nother softwares/packages: .sav(SPSS), .dta(STATA)\n\nCommon data types in R:\n\ndata frame\ntibble (tbl_df): it does much less than a data frame (a neater data frame), as it never changes the type of the inputs (e.g. it keeps list columns unchanged, and never converts strings to factors), it never changes the names of variables, it only recycles inputs of length 1, and it never creates row.names().\n\n\ndata &lt;- data.frame(a = 1:26, b = letters[1:26], c = Sys.Date() - 1:26)\ndata\nas_tibble(data)\n\n\nstudents &lt;- read.csv(\"https://pos.it/r4ds-students-csv\") # from URL\nstudents &lt;- read.csv(\"data/students.csv\") # from local\nstudents\nstr(students)\nsummary(students)\n\n\nstudents &lt;- read.csv(\"data/students.csv\", na.strings=c(\"N/A\", \"\"))\n# students &lt;- read_csv(\"data/students.csv\", na = c(\"N/A\", \"\"))\n\n\nBasic data cleaning\n\nstr(students)\nstudents |&gt;\n  rename(student_id = Student.ID,\n         full_name = Full.Name,\n         fav_food = favourite.food)\n\nrename(students,\n       student_id = Student.ID,\n       full_name = Full.Name,\n       fav_food = favourite.food)\n\nstudents_rename &lt;- students |&gt;\n                   rename(student_id = Student.ID,\n                          full_name = Full.Name,\n                          fav_food = favourite.food)\n\n\n# a faster way\nstudents_rename &lt;- clean_names(students)\nstudents_rename &lt;- mutate(students_rename, meal_plan = factor(meal_plan))\nstr(students_rename)\n\n\nstudents_clean &lt;- students_rename |&gt;\n                  mutate(age = if_else(age == \"five\", \"5\", age))\n\n#students_rename2 &lt;- students_rename\n#students_rename2$age &lt;- ifelse(students_rename2$age == \"five\", 5, students_rename2$age)\n#students_rename2$age[students_rename2$age == \"five\"] &lt;- 5\n\nNote: if_else() has three arguments. The first argument test should be a logical vector. The result will contain the value of the second argument, yes, when test is TRUE, and the value of the third argument, no, when it is FALSE. Here we’re saying if age is the character string “five”, make it “5”, and if not leave it as age.\n\nstudents_clean_final &lt;- students_clean |&gt;\n                        mutate(group = case_when(\n                          age &lt;= 5 ~ \"young\",\n                          age &gt; 5 ~ \"old\",\n                          .default = \"other\"\n                        ))\n\n\n\nShow the code\nstudents_clean_final &lt;- students |&gt;\n                        clean_names() |&gt;\n                        mutate(meal_plan = factor(meal_plan),\n                               age = parse_number(if_else(age == \"five\", \"5\", age)),\n                               group = case_when(\n                                       age &lt;= 5 ~ \"young\",\n                                       age &gt; 5 ~ \"old\",\n                                       .default = \"other\"))\n\n\n\nwrite.csv(students_clean_final, \"data/students_final.csv\", row.names = F)",
+    "crumbs": [
+      "Introduction: Feb 14"
+    ]
+  },
+  {
+    "objectID": "intro.html#data-tidying",
+    "href": "intro.html#data-tidying",
+    "title": "Introduction to R",
+    "section": "Data tidying",
+    "text": "Data tidying\nIn real life, the data you collected is “messy” and “dirty”.\n\nData Scientists spend up to 80% of the time on data cleaning and 20 percent of their time on actual data analysis. 1\n\nThe process of “tidying” data would thus create what’s known as tidy data, as populated by Hadley Wickham (one of the authors of R for Data Science).\n\nTidy datasets provide a standardized way to link the structure of a dataset (its physical layout) with its semantics (its meaning). 2\n\nEach dataset shows the same values of four variables: country, year, population, and number of documented cases of TB (tuberculosis), but each dataset organizes the values in a different way.\n\n\n\n\n\n\n❓ Question: are they the same datasets? Which one is easier to work with and why?\n\n\n\n\n\n\n\ntable1\n\n# A tibble: 6 × 4\n  country      year  cases population\n  &lt;chr&gt;       &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt;\n1 Afghanistan  1999    745   19987071\n2 Afghanistan  2000   2666   20595360\n3 Brazil       1999  37737  172006362\n4 Brazil       2000  80488  174504898\n5 China        1999 212258 1272915272\n6 China        2000 213766 1280428583\n\ntable2\n\n# A tibble: 12 × 4\n   country      year type            count\n   &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;           &lt;dbl&gt;\n 1 Afghanistan  1999 cases             745\n 2 Afghanistan  1999 population   19987071\n 3 Afghanistan  2000 cases            2666\n 4 Afghanistan  2000 population   20595360\n 5 Brazil       1999 cases           37737\n 6 Brazil       1999 population  172006362\n 7 Brazil       2000 cases           80488\n 8 Brazil       2000 population  174504898\n 9 China        1999 cases          212258\n10 China        1999 population 1272915272\n11 China        2000 cases          213766\n12 China        2000 population 1280428583\n\ntable3\n\n# A tibble: 6 × 3\n  country      year rate             \n  &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;            \n1 Afghanistan  1999 745/19987071     \n2 Afghanistan  2000 2666/20595360    \n3 Brazil       1999 37737/172006362  \n4 Brazil       2000 80488/174504898  \n5 China        1999 212258/1272915272\n6 China        2000 213766/1280428583\n\n\nA tidy data set is:\n\nEach variable is a column; each column is a variable.\nEach observation is a row; each row is an observation.\nEach value is a cell; each cell is a single value.\n\n\n\n\nSource: r4ds\n\n\nLet’s work with the table1 here.\n\n# Compute rate per 10,000\ntb_table &lt;- table1 |&gt;\n  mutate(rate = cases / population * 10000)\n\n\ntb_year &lt;- table1 |&gt; \n  group_by(year) |&gt; \n  summarize(total_cases = sum(cases))\n\n\n\n\n\n\n\nExercise\n\n\n\n\n\nUsing table1 to calculate the TB cases per year in each country. (Hint: use mean())\n\n\nShow the code\ntable1 |&gt; \n  group_by(country) |&gt; \n  summarize(mean_cases = mean(cases))",
+    "crumbs": [
+      "Introduction: Feb 14"
+    ]
+  },
+  {
+    "objectID": "intro.html#data-transformation",
+    "href": "intro.html#data-transformation",
+    "title": "Introduction to R",
+    "section": "Data transformation",
+    "text": "Data transformation\n\nColumns and rows\nflights is a dataset on flights that departed from New York City in 2013.\n\n#install.packages(\"nycflights13\")\nlibrary(nycflights13)\nflights\nstr(flights)\n\n\n# Subseting certain columns\nflights_sub &lt;- flights |&gt;\n  select(c(month, day, flight, carrier, origin, dest, distance, air_time))\n\n# Creating new columns that are derived from the existing columns\nflights_sub &lt;- flights_sub |&gt; \n  mutate(speed = distance / air_time * 60)\n\n\n# Filtering certain rows\nflights_IAH &lt;- flights |&gt;\n  filter(dest == \"IAH\")\n\nflights_summer &lt;- flights |&gt;\n   filter(month == 6 | month == 7 | month == 8) #OR\n\nflights_summer &lt;- flights |&gt;\n   filter(month %in% c(6,7,8))\n\nflights_jan1 &lt;- flights |&gt; \n  filter(month == 1 & day == 1) #AND\n\n\nflights |&gt; \n  arrange(year, month, day, dep_time)\n\nflights |&gt; \n  arrange(desc(dep_delay))\n\n\nflights |&gt; \n  distinct(origin, dest, .keep_all = TRUE)\n\n\nflights |&gt; \n  group_by(month) |&gt; \n  summarize(\n    mean_delay = mean(dep_delay, na.rm = TRUE), \n    n = n()\n  )\n\ndaily_flights &lt;- flights |&gt;\n  group_by(year, month, day) |&gt;\n  summarize(\n    mean_delay = mean(dep_delay, na.rm = TRUE), \n    n = n())\n\n\n\n\n\n\n\nExercise\n\n\n\n\n\n\nUsing the same flights dataset to creat a new dataframe flights_houston, and:\n\n\nOnly include flights heading to Houston (IAH and HOU)\nCalcuate the speed (\\(speed = distance / air\\_time * 60\\))\nOnly keep the columns of “year”, “month”, “day”,“dep_time”, “carrier”, “flight”, and “speed”\nArrange the data based on the speed with a desceding order.\n\n\n\nShow the code\nflights_houston &lt;- flights |&gt; \n  filter(dest == \"IAH\" | dest == \"HOU\") |&gt; \n  mutate(speed = distance / air_time * 60) |&gt; \n  select(year:day, dep_time, carrier, flight, speed) |&gt; \n  arrange(desc(speed))\n\n\n\nUsing the same flights dataset to find out which carrier heading to which airport has the worst average delays?\n\n\n\nShow the code\ndelay_flights &lt;- flights |&gt;\n  group_by(carrier, dest) |&gt;\n  summarize(\n    mean_delay = mean(dep_delay, na.rm = TRUE), \n    n = n())\n\n\n\n\n\n\n\nLengthening and widening data\nIn reality, you need long-format data much more commonly than wide-format data (such as visualizing in ggplot2 and modeling).\n\nWide format data: it has a column for each variable and a long format data. The billboard dataset records the billboard rank of songs in the year 2000:\n\n\nbillboard\n\n\nLong format data: it has a column for possible variable types and a column for the values of those variables. cms_patient_experience, is a dataset from the Centers of Medicare and Medicaid services that collects data about patient experiences:\n\n\ncms_patient_experience\n\ntidyr provides two functions for pivoting data:\n\npivot_longer(): it takes wide-format data and turn it into long-format data (melt in reshape2). \npivot_wider(): it takes long-format data and turn it into wide-format data (cast in reshape2).\n\n\nbillboard |&gt; \n  pivot_longer(\n    cols = starts_with(\"wk\"), \n    names_to = \"week\", \n    values_to = \"rank\"\n  )\n\n\nbilloard_longer &lt;- billboard |&gt; \n                    pivot_longer(\n                      cols = starts_with(\"wk\"), \n                      names_to = \"week\", \n                      values_to = \"rank\",\n                      values_drop_na = TRUE) |&gt; \n                    mutate(week = parse_number(week))\n\nBut in reality, we might need to deal with multiple variables at the same time… Now, let’s take a look at the who2 dataset, the source of table1 that you saw above.\n\nwho2\n\nThis dataset is collected by the World Health Organisation, records information about tuberculosis diagnoses. There are two columns that are already variables and are easy to interpret: country and year. They are followed by 56 columns like “sp_m_014”, “ep_m_4554”, and “rel_m_3544”. Each column name is made up of three pieces separated by “_”. The first piece,“sp/rel/ep”, describes the method used for the diagnosis, the second piece, “m/f” is the gender (coded as a binary variable in this dataset), and the third piece, “014/1524/2534/3544/4554/5564/65” is the age range (“014” represents “0-14”, for example).\n\nwho2_long &lt;- who2 |&gt; \n              pivot_longer(\n                cols = !(country:year),\n                names_to = c(\"diagnosis\", \"gender\", \"age\"), \n                names_sep = \"_\",\n                values_to = \"count\"\n              )\n\n\n\n\n\n\n\nExercise\n\n\n\n\n\nThe following (wide) dataset shows the number of points scored by various NBA basketball players in different years. Please tranform it to a long format.\n\nnba &lt;- data.frame(player=c('Joel Embiid', 'Luka Doncic', 'Jayson Tatum', 'Trae Young'),\n                 year1=c(28.5, 27.7, 26.4,25.3),\n                 year2=c(30.6, 28.4, 26.9, 28.4),\n                 year3=c(33.1, 32.4, 30.1, 26.2))\n\n\n\nShow the code\nnba_long &lt;- nba |&gt;\n  pivot_longer(cols=c('year1', 'year2', 'year3'),\n               names_to='year',\n               values_to='points')\nnba_long",
+    "crumbs": [
+      "Introduction: Feb 14"
+    ]
+  },
+  {
+    "objectID": "intro.html#footnotes",
+    "href": "intro.html#footnotes",
+    "title": "Introduction to R",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nDasu, T. & Johnson, T. (2003). Exploratory Data Mining and Data Cleaning.↩︎\nWickham, H. (2014). Journal of Statistical Software, 59(10), 1–23. https://doi.org/10.18637/jss.v059.i10↩︎",
+    "crumbs": [
+      "Introduction: Feb 14"
+    ]
+  },
+  {
+    "objectID": "intro.html#simple-statistics",
+    "href": "intro.html#simple-statistics",
+    "title": "Introduction to R",
+    "section": "Simple statistics",
+    "text": "Simple statistics\nLet’s play with a built-in dataset iris. This data set provides the measurements in centimeters of the variables sepal length and width and petal length and width, respectively, for 50 flowers from each of 3 species of iris. The species are Iris setosa, versicolor, and virginica. (see ?iris for more detail).\n\nT-Test and ANOVA\n\ndata(iris)\nstr(iris)\nsummary(iris)\n\nIf we wanted to test whether the mean height of sepal in this sample is equal to 6 cm (mu = 6), assuming these data are normally distributed, we can use a t.test() to do so.\n\nt.test(iris$Sepal.Length, mu = 6)\n\n\nres_aov &lt;- aov(Sepal.Length ~ Species, data = iris)\nsummary(res_aov)\nboxplot(Sepal.Length ~ Species, data = iris)\n\n\n\nCorrelation\n\ncor(iris$Sepal.Length, iris$Petal.Length)\ncor.test(iris$Sepal.Length, iris$Petal.Length)\n\n\niris_mat &lt;- iris[, -5]\ncor(iris_mat)\n\n\n\nSimple regression\n\nreg1 &lt;- lm(Sepal.Length ~ Species, data = iris)\nsummary(reg1)\n\n\nreg2 &lt;- lm(Sepal.Length ~ Sepal.Width + Petal.Length + Petal.Width , data = iris)\nsummary(reg2)\n\n\nlibrary(lme4)\nreg3 &lt;- lmer(Sepal.Length ~ Sepal.Width + Petal.Length + Petal.Width + (1 | Species) , data = iris)\nsummary(reg3)\n\n\n\n\n\n\n\nExercise\n\n\n\n\n\nFind your favorite datasets data() or import your own data. Perform the basic statistic analysis as shown above (based on the research questions you are interested in).",
     "crumbs": [
       "Introduction: Feb 14"
     ]
