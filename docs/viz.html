@@ -187,7 +187,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#changing-colors-and-themes" id="toc-changing-colors-and-themes" class="nav-link" data-scroll-target="#changing-colors-and-themes">Changing Colors and Themes</a></li>
   <li><a href="#facet-wrapping" id="toc-facet-wrapping" class="nav-link" data-scroll-target="#facet-wrapping">Facet Wrapping</a></li>
   </ul></li>
-  <li><a href="#exporing-more-visualizations" id="toc-exporing-more-visualizations" class="nav-link" data-scroll-target="#exporing-more-visualizations">Exporing More Visualizations</a>
+  <li><a href="#exploring-more-visualizations" id="toc-exploring-more-visualizations" class="nav-link" data-scroll-target="#exploring-more-visualizations">Exploring More Visualizations</a>
   <ul class="collapse">
   <li><a href="#boxplots-distribution-by-category" id="toc-boxplots-distribution-by-category" class="nav-link" data-scroll-target="#boxplots-distribution-by-category">Boxplots (Distribution by Category)</a></li>
   <li><a href="#line-charts-time-series-data-simulation" id="toc-line-charts-time-series-data-simulation" class="nav-link" data-scroll-target="#line-charts-time-series-data-simulation">Line Charts (Time-series Data Simulation)</a></li>
@@ -199,6 +199,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#display-rows-and-columns" id="toc-display-rows-and-columns" class="nav-link" data-scroll-target="#display-rows-and-columns">Display Rows and Columns</a></li>
   <li><a href="#display-column-names" id="toc-display-column-names" class="nav-link" data-scroll-target="#display-column-names">Display Column Names</a></li>
   <li><a href="#now-lets-visualize" id="toc-now-lets-visualize" class="nav-link" data-scroll-target="#now-lets-visualize">Now Let’s Visualize</a></li>
+  <li><a href="#saving-your-ggplot-locally" id="toc-saving-your-ggplot-locally" class="nav-link" data-scroll-target="#saving-your-ggplot-locally">Saving your ggplot locally</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -256,7 +257,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <figcaption>Image from <a href="https://r.qcbs.ca/workshop03/book-en/grammar-of-graphics-gg-basics.html">QCBS R Workshop Series</a></figcaption>
 </figure>
 </div>
-<p>This data visualization workshop will utilize the <code>ggplot2</code> package and two pre-existing datasets <code>mpg</code> and <code>diamonds</code>. We will begin by using <code>mpg</code> to showcase some of the capabilities within R. Remember, we always begin by loading the necessary package. After intalling Tidyverse in session one, you should have the ggplot2 package already installed.</p>
+<p>This data visualization workshop will utilize the <code>ggplot2</code> package and two pre-existing datasets <code>mpg</code> and <code>diamonds</code>. We will begin by using <code>mpg</code> to showcase some of the capabilities within R. Remember, we always begin by loading the necessary package. After installing <code>Tidyverse</code> in session one, you should have the <code>ggplot2</code> package already installed.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">"~/Documents/Teaching/Workshop/beacon"</span>) <span class="co"># good practice to set up your working directory</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -347,8 +348,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 </section>
 </section>
-<section id="exporing-more-visualizations" class="level2">
-<h2 class="anchored" data-anchor-id="exporing-more-visualizations">Exporing More Visualizations</h2>
+<section id="exploring-more-visualizations" class="level2">
+<h2 class="anchored" data-anchor-id="exploring-more-visualizations">Exploring More Visualizations</h2>
 <section id="boxplots-distribution-by-category" class="level3">
 <h3 class="anchored" data-anchor-id="boxplots-distribution-by-category">Boxplots (Distribution by Category)</h3>
 <div class="cell">
@@ -668,8 +669,42 @@ Diamond Exercise 3
 </div>
 </div>
 </div>
+</section>
+<section id="saving-your-ggplot-locally" class="level3">
+<h3 class="anchored" data-anchor-id="saving-your-ggplot-locally">Saving your ggplot locally</h3>
+<p>The <code>ggsave()</code> function in R is used to save a ggplot visualization to a file. It allows specifying the filename, format (e.g., PNG, PDF, JPEG), dimensions, resolution, and other settings. Here’s an example of how to create a scatter plot of carat vs.&nbsp;price and save it as a PNG file using ggsave():</p>
+<section id="create-a-scatter-plot" class="level4">
+<h4 class="anchored" data-anchor-id="create-a-scatter-plot">Create a scatter plot</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(diamonds, <span class="fu">aes</span>(<span class="at">x =</span> carat, <span class="at">y =</span> price, <span class="at">color =</span> cut)) <span class="sc">+</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span> </span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Diamond Price vs. Carat"</span>,</span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Carat"</span>,</span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Price"</span>) <span class="sc">+</span></span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="display-the-plot" class="level4">
+<h4 class="anchored" data-anchor-id="display-the-plot">Display the plot</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(plot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="save-the-plot-as-a-png-file" class="level4">
+<h4 class="anchored" data-anchor-id="save-the-plot-as-a-png-file">Save the plot as a PNG file</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="at">filename =</span> <span class="st">"diamond_plot.png"</span>, <span class="at">plot =</span> plot, <span class="at">width =</span> <span class="dv">8</span>, <span class="at">height =</span> <span class="dv">6</span>, <span class="at">dpi =</span> <span class="dv">300</span>) <span class="co"># Normally the default setting is using the last plot you created, but you can also specify the ggplot object by using plot = in the argument</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="the-plot-will-now-be-saved-in-your-working-directory" class="level4">
+<h4 class="anchored" data-anchor-id="the-plot-will-now-be-saved-in-your-working-directory">The plot will now be saved in your working directory</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>() <span class="co"># Viewing the working directory. Again, that's why it will be helpful to set your working directory at the beginning.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Congratulations! You’ve completed Section 2 of Data Visualization—one step closer to becoming an R master! 🎉 Since this is just an introduction, if you’d love to dive deeper, feel free to explore more resources like the <a href="https://r-graph-gallery.com/ggplot2-package.html">R graph gallery</a> for extra inspiration!</p>
 
 
+</section>
 </section>
 </section>
 

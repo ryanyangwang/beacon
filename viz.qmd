@@ -19,7 +19,7 @@ execute:
 
 ![Image from [QCBS R Workshop Series](https://r.qcbs.ca/workshop03/book-en/grammar-of-graphics-gg-basics.html)](image/layer.png){width="60%"}
 
-This data visualization workshop will utilize the `ggplot2` package and two pre-existing datasets `mpg` and `diamonds`. We will begin by using `mpg` to showcase some of the capabilities within R. Remember, we always begin by loading the necessary package. After intalling Tidyverse in session one, you should have the ggplot2 package already installed.
+This data visualization workshop will utilize the `ggplot2` package and two pre-existing datasets `mpg` and `diamonds`. We will begin by using `mpg` to showcase some of the capabilities within R. Remember, we always begin by loading the necessary package. After installing `Tidyverse` in session one, you should have the `ggplot2` package already installed.
 
 ```{r message = F}
 library(ggplot2)
@@ -124,7 +124,7 @@ ggplot(mpg, aes(x = displ)) +
   facet_wrap(~ class)
 ```
 
-## Exporing More Visualizations
+## Exploring More Visualizations
 
 ### Boxplots (Distribution by Category)
 
@@ -214,7 +214,6 @@ ggplot(mpg, aes(x = cty)) + # Uses city mileage as the variable.
   theme_classic() # Provides a clean layout.
 ```
 :::
-
 
 ::: {.callout-tip collapse="true"}
 ## MPG Exercise 3
@@ -408,3 +407,37 @@ ggplot(diamonds, aes(x = carat, y = price, color = clarity)) + # Maps carat to t
     theme_light() # Uses a lighter theme for a cleaner appearance.
 ```
 :::
+
+
+### Saving your ggplot locally
+
+The `ggsave()` function in R is used to save a ggplot visualization to a file. It allows specifying the filename, format (e.g., PNG, PDF, JPEG), dimensions, resolution, and other settings. Here’s an example of how to create a scatter plot of carat vs. price and save it as a PNG file using ggsave():
+ 
+#### Create a scatter plot
+```{r}
+plot <- ggplot(diamonds, aes(x = carat, y = price, color = cut)) +
+  geom_point(alpha = 0.5) + 
+  labs(title = "Diamond Price vs. Carat",
+       x = "Carat",
+       y = "Price") +
+  theme_minimal()
+ 
+```
+
+#### Display the plot
+```{r}
+print(plot)
+```
+
+#### Save the plot as a PNG file
+```{r}
+ggsave(filename = "diamond_plot.png", plot = plot, width = 8, height = 6, dpi = 300) # Normally the default setting is using the last plot you created, but you can also specify the ggplot object by using plot = in the argument
+```
+
+#### The plot will now be saved in your working directory
+```{r}
+getwd() # Viewing the working directory. Again, that's why it will be helpful to set your working directory at the beginning.
+```
+
+
+Congratulations! You’ve completed Section 2 of Data Visualization—one step closer to becoming an R master! 🎉 Since this is just an introduction, if you'd love to dive deeper, feel free to explore more resources like the [R graph gallery](https://r-graph-gallery.com/ggplot2-package.html) for extra inspiration! 
