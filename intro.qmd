@@ -1,6 +1,6 @@
 ---
-title: "Introduction to R"
-subtitle: Basic data wrangling and analysis in R
+title: "Basic data wrangling and analysis in R"
+subtitle: Computational methods workshop session 1 (Feb 14th, 2025)
 author:
   - name: Ryan Y. Wang, Ph.D.
     email: ywang4@lsu.edu
@@ -10,18 +10,17 @@ execute:
   output: false
 ---
 
-- ⏰ Time: 9:00 -- 11:00 AM, Friday, Feb 14th, 2025
-- 📍 Location: Journalism Building Room 140
+-   ⏰ Time: 9:00 -- 11:00 AM, Friday, Feb 14th, 2025
+-   📍 Location: Journalism Building Room 140
 
 [![Source: r4ds](image/whole_game.png)](https://r4ds.hadley.nz/whole-game)
 
 Data wrangling/manipulation is the most important part when we deal with any types of data - before visualization and modeling. We will be mainly following [*R for Data Science*](https://r4ds.hadley.nz/), which includes importing data, transforming data, and *tidying* data.
 
-
 ```{r message = F}
 library(tidyverse)
 library(janitor)
-setwd("~/Documents/Teaching/Workshop/beacon") # good practice to set up your working directory
+#setwd("~/Documents/Teaching/Workshop/beacon") # good practice to set up your working directory
 ```
 
 ## Understanding data frame
@@ -223,7 +222,6 @@ students_clean_final <- students_clean |>
                         ))
 ```
 
-
 ```{r}
 #| code-fold: true
 #| code-summary: "Show the code"
@@ -258,7 +256,7 @@ The process of "tidying" data would thus create what's known as tidy data, as po
 
 Each dataset shows the same values of four variables: country, year, population, and number of documented cases of TB (tuberculosis), but each dataset organizes the values in a different way.
 
-::: {.callout-note}
+::: callout-note
 #### ❓ **Question**: are they the same datasets? Which one is easier to work with and why?
 :::
 
@@ -404,7 +402,6 @@ delay_flights <- flights |>
     mean_delay = mean(dep_delay, na.rm = TRUE), 
     n = n())
 ```
-
 :::
 
 ### Lengthening and widening data
@@ -453,7 +450,7 @@ But in reality, we might need to deal with multiple variables at the same time..
 who2
 ```
 
-This dataset is collected by the World Health Organisation, records information about tuberculosis diagnoses. There are two columns that are already variables and are easy to interpret: country and year. They are followed by 56 columns like "sp_m\_014", "ep_m\_4554", and "rel_m\_3544". Each column name is made up of three pieces separated by "\_". The first piece,"sp/rel/ep", describes the method used for the diagnosis, the second piece, "m/f" is the gender (coded as a binary variable in this dataset), and the third piece, "014/1524/2534/3544/4554/5564/65" is the age range ("014" represents "0-14", for example).
+This dataset is collected by the World Health Organisation, records information about tuberculosis diagnoses. There are two columns that are already variables and are easy to interpret: country and year. They are followed by 56 columns like "sp_m_014", "ep_m_4554", and "rel_m_3544". Each column name is made up of three pieces separated by "\_". The first piece,"sp/rel/ep", describes the method used for the diagnosis, the second piece, "m/f" is the gender (coded as a binary variable in this dataset), and the third piece, "014/1524/2534/3544/4554/5564/65" is the age range ("014" represents "0-14", for example).
 
 ```{r}
 who2_long <- who2 |> 
@@ -464,7 +461,6 @@ who2_long <- who2 |>
                 values_to = "count"
               )
 ```
-
 
 ::: {.callout-tip collapse="true"}
 ### Exercise
@@ -489,7 +485,6 @@ nba_long
 ```
 :::
 
-
 ## Simple statistics
 
 Let's play with a built-in dataset `iris`. This data set provides the measurements in centimeters of the variables sepal length and width and petal length and width, respectively, for 50 flowers from each of 3 species of iris. The species are Iris setosa, versicolor, and virginica. (see `?iris` for more detail).
@@ -501,7 +496,8 @@ data(iris)
 str(iris)
 summary(iris)
 ```
-If we wanted to test whether the mean height of sepal in this sample is equal to 6 cm (mu = 6), assuming these data are normally distributed, we can use a `t.test()` to do so. 
+
+If we wanted to test whether the mean height of sepal in this sample is equal to 6 cm (mu = 6), assuming these data are normally distributed, we can use a `t.test()` to do so.
 
 ```{r}
 t.test(iris$Sepal.Length, mu = 6)
@@ -514,6 +510,7 @@ boxplot(Sepal.Length ~ Species, data = iris)
 ```
 
 ### Correlation
+
 ```{r}
 cor(iris$Sepal.Length, iris$Petal.Length)
 cor.test(iris$Sepal.Length, iris$Petal.Length)
@@ -523,11 +520,14 @@ cor.test(iris$Sepal.Length, iris$Petal.Length)
 iris_mat <- iris[, -5]
 cor(iris_mat)
 ```
+
 ### Simple regression
+
 ```{r}
 reg1 <- lm(Sepal.Length ~ Species, data = iris)
 summary(reg1)
 ```
+
 ```{r}
 reg2 <- lm(Sepal.Length ~ Sepal.Width + Petal.Length + Petal.Width , data = iris)
 summary(reg2)

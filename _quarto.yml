@@ -13,8 +13,10 @@ website:
         file: index.qmd
       - text: "Preparation"
         file: prepare.qmd
-      - text: "Introduction: Feb 14"
+      - text: "Introduction"
         file: intro.qmd
+      - text: "Data visualization"
+        file: viz.qmd
       
         
 format:

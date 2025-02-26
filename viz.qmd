@@ -1,0 +1,410 @@
+---
+title: "Data visualization in R"
+subtitle: Computational methods workshop session 2 (Feb 28th, 2025)
+author:
+  - name: Josh Joshua, Ph.D.
+    email: joshuajackson@lsu.edu
+    affiliation:
+      - name: Manship School of Mass Communication, Louisiana State University
+execute: 
+  output: false
+---
+
+-   ⏰ Time: 9:00 -- 11:00 AM, Friday, Feb 28th, 2025
+-   📍 Location: Journalism Building Room 140
+
+`ggplot2` is easier to read if each line represents a new element. This means that as you add each layer, you should start a new line.
+
+![Image from [The Grammar of Graphics](https://link.springer.com/book/10.1007/0-387-28695-0)](image/graphics.png){width="60%"}
+
+![Image from [QCBS R Workshop Series](https://r.qcbs.ca/workshop03/book-en/grammar-of-graphics-gg-basics.html)](image/layer.png){width="60%"}
+
+This data visualization workshop will utilize the `ggplot2` package and two pre-existing datasets `mpg` and `diamonds`. We will begin by using `mpg` to showcase some of the capabilities within R. Remember, we always begin by loading the necessary package. After intalling Tidyverse in session one, you should have the ggplot2 package already installed.
+
+```{r message = F}
+library(ggplot2)
+setwd("~/Documents/Teaching/Workshop/beacon") # good practice to set up your working directory
+```
+
+## Explore the data
+
+```{r}
+data(mpg)
+```
+
+The `mpg` dataset comes pre-installed with ggplot2, so let's first explore the data before visualizing it. Once loading the data, you should be able to see 234 rows of data with 11 columns or variables. Let's discuss what we're seeing in the table.
+
+If you only want to see the first six rows of data to make sure it's populating correctly, use the `head` function.
+
+```{r}
+head(mpg)
+```
+
+To make sure the data is loading under the correct variables, you can use the `str` function
+
+```{r}
+str(mpg)
+```
+
+## Creating Basic Visualizations
+
+### Scatter Plots (Relationship between two numeric variables)
+
+Now that we've looked at the data, let's build a few scatter plots with them
+
+```{r}
+ggplot(data = mpg, aes(x = displ, y = hwy)) + geom_point()
+```
+
+Remember that R is like a new language, so what did we just tell it to do?
+
+```{r}
+ggplot(data = mpg, aes(x = displ, y = hwy)) + #Define dataset and aesthetics
+  geom_point() #Add a scatter plot layer
+```
+
+### Bar Charts (Categorical Data)
+
+```{r}
+ggplot(mpg, aes(x = class)) + geom_bar()
+```
+
+### Histograms(Distribution of a Numeric Variable)
+
+```{r}
+ggplot(mpg, aes(x = hwy)) + geom_histogram(binwidth = 5, fill = "blue", color = "black")
+```
+
+Now let's play with the histogram a little. We'll try changing the binwidth and colors.
+
+The smaller the binwidth number, the more detailed the x axis becomes.
+
+```{r}
+ggplot(mpg, aes(x = hwy)) + geom_histogram(binwidth = 3, fill = "green", color = "red")
+ggplot(mpg, aes(x = hwy)) + geom_histogram(binwidth = 6, fill = "purple", color = "gold")
+```
+
+## Customizing Plots
+
+### Adding Titles and Labels
+
+```{r}
+ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_point() +
+  labs(title = "Engine Displacement vs. Highway MPG", x = "Engine Displacement", y = "Highway MPG")
+```
+
+### Changing Colors and Themes
+
+```{r}
+ggplot(mpg, aes(x = displ, y = hwy, color = class)) + geom_point()
+```
+
+In this scatter plot, we see how each class has been grouped into its own color, but what happens if we got rid of that?
+
+```{r}
+ggplot(mpg, aes(x = displ, y = hwy)) + geom_point(color = "red")
+```
+
+### Facet Wrapping
+
+#### Facet wrapping creates multi-panel plots for data within the same category
+
+```{r}
+ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_point() +
+  facet_wrap(~ class)
+```
+
+Now what if we wanted to see engine displacement by class as a histogram instead?
+
+```{r}
+ggplot(mpg, aes(x = displ)) +
+  geom_histogram() +
+  facet_wrap(~ class)
+```
+
+## Exporing More Visualizations
+
+### Boxplots (Distribution by Category)
+
+```{r}
+ggplot(mpg, aes(x = class, y = hwy)) + geom_boxplot()
+```
+
+What do we see in this box and whisker plot? Where are the median values? Where are the outliers?
+
+#### Now lets manipulate the visual slightly
+
+```{r}
+ggplot(mpg, aes(x = class, y = hwy)) + geom_boxplot(color = "blue")
+ggplot(mpg, aes(x = class, y = hwy)) + geom_boxplot(color = "blue" , fill = "orange")
+```
+
+### Line Charts (Time-series Data Simulation)
+
+Line charts show the progression of data over a period of time, but we don't really have time progressive data in mpg do we?
+
+```{r}
+ggplot(mpg, aes(x = year, y = cyl)) + geom_line()
+```
+
+We see how the line chart doesn't work with this visualization, so let's use one where it does. Another pre-installed dataset from ggplot is called `economics`. Let's load that.
+
+```{r}
+data("economics")
+```
+
+You should see 574 rows of data across 6 variables including dates. Let's say we wanted to track the unemployment numbers over time within this data set.
+
+```{r}
+ggplot(economics, aes(x = date, y = unemploy)) + geom_line()
+```
+
+Much better right? And what do we do if we wanted to change that black line to another color?
+
+```{r}
+ggplot(economics, aes(x = date, y = unemploy)) + geom_line(color = "white")
+```
+
+Too hard to see? Let's change it again.
+
+```{r}
+ggplot(economics, aes(x = date, y = unemploy)) + geom_line(color = "brown")
+```
+
+::: {.callout-tip collapse="true"}
+## MPG Exercise 1
+
+Modify the scatter plot of mpg to do the following:
+
+-   Use cyl (number of cylinders) as the color aesthetic.
+-   Change the point size to 3.
+-   Add a title and axis labels
+-   Hint: Use `aes(color = factor(cyl))` to convert cyl to a factor for ggplot to read it as a categorical variable
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
+ggplot(mpg, aes(x = displ, y = hwy, color = factor(cyl))) + # We convert cyl to a factor so ggplot treats it as categorical.
+  geom_point(size = 3) + # Increases point size.
+  labs(title = "Engine Displacement vs. Highway MPG",
+       x = "Engine Displacement (L)",
+       y = "Highway MPG",
+       color = "Cylinders") + # Adds a title, axis labels, and legend title.
+  theme_minimal() # Gives a cleaner look to the plot.
+```
+:::
+
+::: {.callout-tip collapse="true"}
+## MPG Exercise 2
+
+Customize the mpg histogram to reflect the following:
+
+-   Create a histogram of the mpg dataset showing the distribution of cty (city mileage).
+-   Use a bin width of 3.
+-   Change the fill color to purple and outline to black.
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
+ggplot(mpg, aes(x = cty)) + # Uses city mileage as the variable.
+  geom_histogram(binwidth = 3, fill = "purple", color = "black") + # Sets appropriate bin width to prevent overcrowding; Customizes the appearance.
+  labs(title = "Distribution of City MPG", x = "City MPG", y = "Count") +
+  theme_classic() # Provides a clean layout.
+```
+:::
+
+
+::: {.callout-tip collapse="true"}
+## MPG Exercise 3
+
+Using facets as follows:
+
+-   Create a scatter plot of mpg with displ on the x-axis and hwy on the y-axis
+-   Facet the plot by the drive type (`drv`)
+-   Hint: Use `facet_wrap(~drv)`
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
+ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_point(color = "blue", alpha = 0.7) + # Uses blue points with some transparency (alpha = 0.7) for better visibility.
+  facet_wrap(~ drv) + # Creates separate panels for each drive type (drv).The `~drv` formula ensures each unique drv value gets its own facet.
+  labs(title = "Engine Displacement vs. Highway MPG by Drive Type",
+       x = "Engine Displacement (L)",
+       y = "Highway MPG",
+       caption = "Drive Type: f = front-wheel, r = rear-wheel, 4 = 4-wheel") + # Adds a descriptive title, axis labels, and a caption explaining drive types.
+  theme_bw() # Uses a black-and-white theme for a clean, high-contrast layout.
+```
+:::
+
+## Shine Bright Like A Diamond
+
+Let's explore a slightly larger dataset now with diamonds.
+
+```{r}
+data(diamonds) 
+```
+
+There are 53,940 rows of data across 10 variables. Let's explore it first.
+
+### View first six rows
+
+```{r}
+head(diamonds)
+```
+
+### Summarize diamonds dataset
+
+```{r}
+summary(diamonds)
+```
+
+For every numeric variable we see the following information:
+
+-   Min: The minimum value.
+-   1st Qu: The value of the first quartile (25th percentile).
+-   Median: The median value.
+-   Mean: The mean value.
+-   3rd Qu: The value of the third quartile (75th percentile).
+-   Max: The maximum value.
+
+For categorical variables, we see a frequency count.
+
+### Display Rows and Columns
+
+```{r}
+dim(diamonds)
+```
+
+### Display Column Names
+
+```{r}
+names(diamonds)
+```
+
+### Now Let's Visualize
+
+Let's begin with a histogram of values for price.
+
+```{r}
+ggplot(data=diamonds, aes(x=price)) +
+  geom_histogram(fill="blue", color="black") +
+  ggtitle("Histogram of Price Values")
+```
+
+Create a scatter plot of carat vs price using cut as a color variable.
+
+```{r}
+ggplot(data=diamonds, aes(x=carat, y=price, color=cut)) + 
+  geom_point()
+```
+
+Create a boxplot of price, grouped by cut
+
+```{r}
+ggplot(data=diamonds, aes(x=cut, y=price)) + 
+  geom_boxplot(fill="purple")
+```
+
+Position Adjustments in Bar Charts
+
+```{r}
+ggplot(data = diamonds) + 
+  geom_bar(mapping = aes(x = cut, color = cut))
+```
+
+Now fill it
+
+```{r}
+ggplot(data = diamonds) + 
+  geom_bar(mapping = aes(x = cut, fill = cut))
+```
+
+Note what happens if you map the fill aesthetic to another variable, like clarity: the bars are automatically stacked. Each colored rectangle represents a combination of cut and clarity.
+
+```{r}
+ggplot(data = diamonds) + 
+  geom_bar(mapping = aes(x = cut, fill = clarity))
+```
+
+The stacking is performed automatically by the position adjustment specified by the position argument. If you don’t want a stacked bar chart, you can use one of three other options: `identity`, `dodge` or `fill`.
+
+```{r}
+ggplot(data = diamonds) + 
+  geom_bar(mapping = aes(x = cut, fill = clarity), position = "fill")
+
+
+ggplot(data = diamonds) + 
+  geom_bar(mapping = aes(x = cut, fill = clarity), position = "dodge")
+```
+
+::: {.callout-tip collapse="true"}
+## Diamond Exercise 1
+
+Create a bar chart of the diamonds dataset where:
+
+-   The x-axis represents the cut of diamonds.
+-   The fill color represents color.
+-   The bars are positioned as fill.
+-   Hint: Use `geom_bar(position = "fill")` to normalize bar heights.
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
+ggplot(diamonds, aes(x = cut, fill = color)) + # Colors bars by diamond color.
+  geom_bar(position = "fill") + # Stacks bars proportionally rather than counting raw values.
+  labs(title = "Proportion of Diamond Colors by Cut",
+       x = "Cut",
+       y = "Proportion",
+       fill = "Color") + # Adds descriptive labels and title.
+  theme_light() # Uses a lighter theme for better readability.
+```
+:::
+
+::: {.callout-tip collapse="true"}
+## Diamond Exercise 2
+
+Create a boxplot to visualize the distribution of diamond prices based on the cut. Customize it by:
+
+-   Using the cut variable on the x-axis and price on the y-axis.
+-   Coloring the boxes by cut.
+-   Adding appropriate labels and a title.
+-   Hint: Use `geom_boxplot()` and `aes(fill = cut)`.
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
+ggplot(diamonds, aes(x = cut, y = price, fill = cut)) + # Maps cut to the x-axis and price to the y-axis. Fills each boxplot with a color based on the cut category.
+  geom_boxplot() + # Creates the boxplot to show median, quartiles, and outliers.
+  labs(title = "Distribution of Diamond Prices by Cut",
+       x = "Cut",
+       y = "Price (USD)") + # Adds a descriptive title and axis labels for clarity.
+  theme_minimal() # Uses a clean and simple theme for better readability.
+```
+:::
+
+::: {.callout-tip collapse="true"}
+## Diamond Exercise 3
+
+Create a scatter plot showing the relationship between carat and price, with points colored by clarity. Customize it by:
+
+-   Mapping carat to the x-axis and price to the y-axis.
+-   Coloring the points based on the clarity variable.
+-   Adjusting transparency (alpha) to handle overplotting.
+-   Adding a title and axis labels.
+-   Hint: Use `geom_point(alpha = 0.5)` to make overlapping points more visible.
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
+ggplot(diamonds, aes(x = carat, y = price, color = clarity)) + # Maps carat to the x-axis and price to the y-axis. Colors points based on clarity.
+    geom_point(alpha = 0.5) + # Uses transparency (alpha = 0.5) to reduce overplotting and improve visibility.
+    labs(title = "Diamond Price vs. Carat",
+         x = "Carat",
+         y = "Price (USD)",
+         color = "Clarity") + # Adds a title, axis labels, and a legend title.
+    theme_light() # Uses a lighter theme for a cleaner appearance.
+```
+:::
