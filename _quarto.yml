@@ -17,6 +17,8 @@ website:
         file: intro.qmd
       - text: "Data visualization"
         file: viz.qmd
+      - text: "Intro to text analysis"
+        file: text.qmd
       
         
 format:

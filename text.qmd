@@ -1,0 +1,540 @@
+---
+title: "Intro to Text Analysisin R"
+subtitle: Computational methods workshop session 3 (Mar 21, 2025)
+author:
+  - name: Jaewon Royce Choi, Ph.D.
+    email: roycechoi@lsu.edu
+    affiliation:
+      - name: Manship School of Mass Communication, Louisiana State University
+execute: 
+  output: false
+---
+
+
+**Text** data is often the most prevalent forms of data available for social scientists. From archival data to social media, text data is an essential part of social scientific inquiries. Text data comes in various shapes and forms including social media posts, comments, profile descriptions, news articles, product reviews, and open-ended survey questions. We will explore the basics of approaching text analysis using computational techniques.
+
+We will use [`stringr`](https://stringr.tidyverse.org/) for wrangling the text data. Another useful package is [`glue`](https://glue.tidyverse.org/), which makes interpolating data into strings very easy. The `stringr` packge is part of `tidyverse`, which means that if you installed `tidyverse`, you already have it installed. For further analysis of text data we will use [`quanteda`](https://quanteda.io/).
+
+::: callout-note
+Another popular package for text analysis is `tidytext`. This is a `tidy` approach to text mining. A [free textbook](https://www.tidytextmining.com/) about using `tidytext` for text mining is available online, as well as an [introduction vignette.](https://cran.r-project.org/web/packages/tidytext/vignettes/tidytext.html)
+:::
+
+![Typical Text Analysis Workflow (Source: [Text Mining with R: A Tidy Approach](https://www.tidytextmining.com/tidytext))](textanal_workflow.png){.lightbox}
+
+We will first explore what text data is, how to pre-process text data, and how to conduct basic text data analysis. But first, let's load the packages.
+
+```{r}
+#| output: false
+library(tidyverse)
+library(quanteda)
+library(glue)
+```
+
+# Understanding Text Data
+
+## Text Data in R
+
+There are several different data types. In R, we have data types such as integer, numeric, factor, etc. Text data are commonly treated as **string** or **character** type. Let's take a glimpse at how computers understand text as a string of characters.
+
+```{r}
+text <- "Hello world!"
+class(text)
+```
+
+R recognizes this as a character data type.
+
+```{r}
+length(text)
+```
+
+Length function returns 1, meaning that the totality of "Hello world!" inside the quotation mark is considered as a single character element. But, one might wonder: isn't "Hello world!" a collection of alphabets and an exclamation mark? Can we decide length of this character based on that?
+
+```{r}
+str_length(text)
+```
+
+This means we can navigate this text based on specific location of a character.
+
+```{r}
+str_sub(text, 7, 11)
+```
+
+If you remember concatenation in R, you can turn multiple strings into a list of words.
+
+```{r}
+words <- c("Spring", "break", "is", "coming")
+class(words)
+```
+
+::: callout-note
+Refresher: You can concatenate numbers and strings together, but the numbers will become characters and will not be treated as numeric variable. See below how 1, 2 becomes "1", "2"
+
+```{r}
+mixed <- c(1, 2, "four", "five")
+print(mixed)
+```
+:::
+
+The `length` function will then count the elements in the list `words`.
+
+```{r}
+length(words)
+```
+
+This means you can also access each element with square brackets.
+
+```{r}
+# a glimpse of what glue package can do
+glue("words[1]: {words[1]}", "\n", # \n is for new line
+     "words[2]: {words[2]}")
+```
+
+You can also join multiple character vectors into one character. Take a look at the `str_c` function, putting together the words in `words` list into one character.
+
+```{r}
+sentence <- str_c(words, collapse = " ") # collapse option specifies the strings you want to use to combine the strings (i.e., what comes between them)
+sentence
+```
+
+## `stringr` to Deal with Text in R
+
+The `stringr` package comes with a wide variety of functions that is highly useful in dealing with text data in R. Below are some functions that are frequently used to navigate through and transform text data in R.
+
+| String Operation                        | `stringr` Function          |
+|-----------------------------------------|-----------------------------|
+| Count characters in s                   | `str_length`(s)             |
+| Extract a substring                     | `str_sub`(s, n1, n2)        |
+| Test if s contains s2                   | `str_detect`(s, s2)         |
+| Count number of matches of s2           | `str_count`(s, s2)          |
+| Strip spaces (at start and end)         | `trimws`(s)                 |
+| Convert to lowercase/uppercase          | `tolower`(s) / `toupper`(s) |
+| Find s1 and replace by s2               | `str_replace`(s, s1, s2)    |
+| Trims repeated whitespaces to one space | `str_squish`(s)             |
+
+```{r}
+text <- "  <p><h1>Digital Advertising:</h1> learn Traditional and Digital Ad.  </p>"
+
+# Remove HTML tags
+str_replace_all(text, "<p>", " ")
+
+```
+
+```{r}
+# use piping
+clean_text <- text %>% 
+  str_replace_all("<h1>", "") %>% 
+  str_replace_all("</h1>", "") %>% 
+  str_replace_all("</p>", "") %>% 
+  str_replace_all("<p>", "") %>% 
+  # convert to lower case
+  tolower() %>% 
+  # trim spaces at the start and end
+  trimws()
+# Result
+clean_text
+
+```
+
+```{r}
+str_length(clean_text)
+```
+
+```{r}
+str_sub(clean_text, 1, 10)
+```
+
+```{r}
+str_count(clean_text, "digital")
+```
+
+```{r}
+str_detect(clean_text, "traditional")
+```
+
+### Practice 1
+
+Use the code below to install and load *Pride & Prejudice* from `janeaustenr` package.
+
+```{r}
+library(janeaustenr)
+pride_txt <- prideprejudice
+head(pride_txt, 20)
+```
+
+1.  Use `stringr` to convert the `pride_txt` to lower case. Use `head` function to inspect the first several observations.
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
+#| output: false
+
+lowertxt <- tolower(pride_txt)
+
+head(lowertxt, 50)
+```
+
+2.  Use `stringr` to replace "mr." with "mr". Inspect the difference. Use `head` function to make it manageable.
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
+#| output: false
+
+head(str_replace_all(lowertxt, "mr.", "mr"), 50)
+```
+
+# Text Analysis Concepts
+
+We will use `quanteda` for further text analysis. You might have to install packages and load them using the code below.
+
+```{r}
+## Install Packages
+# install.packages("quanteda.textplots")
+# install.packages("quanteda.textstats")
+# install.packages("quanteda.textmodels")
+# install.packages("devtools")
+# devtools::install_github("quanteda/quanteda.corpora")
+#library(quanteda.corpora)
+
+library(quanteda.textplots)
+library(quanteda.textstats)
+```
+
+## Tokenization
+
+A central concept that you have to understand when performing computational text analysis or natural language processing (NLP) is **tokenization**. Computers can't identify words naturally. Let's say we have a string, "spring break is almost here." Computers can't tell how many words are in this string. In order for a computer to identify words, you ahve to tell it how to "parse" the text. In other words, how to break down a string into its linguistic parts.
+
+**Tokenizing** is the most common way of parsing text data, where you treat each word as a "token." It is the process of defining the unit of analysis. You can tokenize sentences, which would result in sentence tokens. In most cases, however, word-level tokenization is used.
+
+In `quanteda` packages, `tokens()` function is used for tokenization. This function produces object consisting of a list of tokens in the form of character vectors.
+
+```{r}
+text <- "Watch your speed while driving in monsoon weather!"
+tokens(text)
+```
+
+You can also tokenize a vector of strings.
+
+```{r}
+texts <- c("Watch your speed while driving in monsoon weather!",
+           "Winter is coming")
+tokens(texts)
+```
+
+As we can see here, `tokens()` retains everything, including the exclamation mark, by default. When we analyze text in large scale, we usually don't want to analyze noise caused by punctuation marks or filler words that do not carry meaning. `tokens()` offer several arguments that are useful in filtering out some of these noises. Some of these common noises we want to discard include **punctuation, numbers, symbol, hyphens, etc.**
+
+```{r}
+texts <- c(
+  t1 = "RT: @john_doe https://example.com/news VERY interesting!",
+  t2 = "This is $10 in 999 different ways,\n up and down; left and right!",
+  t3 = "@me and @myself #selfietime"
+)
+
+tokens(texts)
+
+```
+
+```{r}
+tokens(texts, remove_numbers = TRUE, remove_punct = TRUE)
+```
+
+```{r}
+tokens(texts, remove_numbers = FALSE, remove_punct = TRUE)
+```
+
+```{r}
+tokens(texts,
+       remove_numbers = TRUE,
+       remove_punct = TRUE,
+       remove_url = TRUE,
+       remove_symbols = TRUE)
+```
+
+## Stopwords, Stemming, and Lemmatizing
+
+We started to touch upon some basic text data cleaning. In addition to numbers or punctuation, one of the first steps in NLP processing is to remove words that do not contain much information, but occur frequently. For instance, words such as "a" or "the" occur frequently but rarely carry any meaning. To achieve this, we use *stopword lists*, or lists of words we want to exclude from our analysis. `quanteda` comes with predefined stopwords for many languages. You can access them through the `stopwords()` function. See the [stopword](https://github.com/quanteda/stopwords) page for more details about available languages.
+
+```{r}
+head(stopwords("en"), 20)
+```
+
+```{r}
+head(stopwords("korean", source = "marimo"), 20)
+```
+
+To delete the stopwords, we can use `tokens_select()` with the following arguments.
+
+```{r}
+# Save the tokenized item
+txt_tokens <- tokens(texts,
+                     remove_numbers = TRUE,
+                     remove_punct = TRUE,
+                     remove_url = TRUE,
+                     remove_symbols = TRUE) %>% 
+  tokens_tolower()
+# Remove the stopwords
+txt_tokens_clean <- tokens_select(txt_tokens,
+                                  stopwords("en"),
+                                  selection = "remove")
+txt_tokens_clean
+```
+
+::: callout-note
+Sometimes, stopwords require closer attention. For instance, consider the word "will." "Will" can be considered a stop word as an auxiliary verb. However, it can also be a noun (a testament) or a name (Will). If your research questions require a certain stop words, you can customize your own stop word lists.
+:::
+
+Another text pre-processing considerations we should focus on are **stemming** and **lemmatization**. From my personal perspective, these are the processes similar to "standardizing" different versions of words. **Stemming** is the process of removing stems (suffixes and prefixes) from a word. This helps us consolidate words like "immigration," "immigrating," and "immigrants" into one root word "immigra." We can use the `tokens_wordstem()` function to do stemming.
+
+```{r}
+txt <- c(one = "eating eater eaters eats ate",
+         two = "taxing taxes taxed my tax return")
+tokens(txt) %>% 
+  tokens_wordstem()
+
+```
+
+You notice that this made the overall number of tokens gets smaller and manageable. However, you also notice that "ate" was not collapsed into the "eat" stem. To do this, we need a more advanced approach called **lemmatization**. It is better at finding meaningful words/representation, but is computationally expensive. See below for the comparison.
+
+| **Stemming**                                                                                                                   | **Lemmatization**                                                                                             |
+|--------------------------------------|----------------------------------|
+| Stemming is a process that stems or removes last few characters from a word, often leading to incorrect meanings and spelling. | Lemmatization considers the context and converts the word to its meaningful base form, which is called Lemma. |
+| Example: stemming the word 'Caring' would return 'Car'.                                                                        | Example: lemmatizing the word 'Caring' would return 'Care'.                                                   |
+| Stemming is used in case of large dataset where performance is an issue.                                                       | Lemmatization is computationally expensive since it involves look-up tables and what not.                     |
+
+To lemmatize your tokens using `quanteda`, you need to access separate lemma tables and replace your tokens using `tokens_replace()`
+
+```{r}
+tokens_replace(tokens(txt),
+               pattern = lexicon::hash_lemmas$token,
+               replacement = lexicon::hash_lemmas$lemma)
+```
+
+# Corpus
+
+Notice in the code below, when we tokenize the string vector, `quanteda` arranges it separately as "one" and "two." `quanteda` is recognizing each string as a "document." In our actual analysis, we would be dealing with a large number of such documents. In `quanteda` term, this set of documents is called **corpus**. The **corpus** in `qunateda` is a collection (library) of text documents (e.g., X posts, document files). You can convert a data frame to a corpus using the function `corpus()`.
+
+```{r}
+corp <- corpus(data_corpus_inaugural) # read in a built-in corpus available in quanteda.corpora package
+# this is a US presidential inaugural address texts
+head(corp)
+```
+
+```{r}
+class(corp)
+```
+
+```{r}
+summary(corp) %>% head()
+```
+
+# Document-Feature Matrix (DFM)
+
+A **document-feature matrix (DFM)** or document-term matrix transforms a corpus into a matrix or table, where each row represents a document, each column represents a term (word), and the numbers in each cell show how often that word occurs in that document. The word "feature" or "term" simply refers to the unit of analysis being counted. Note that this process removes the order of the words. This approach of not considering the order of words is considered a [**bag-of-word**](https://en.wikipedia.org/wiki/Bag-of-words_model) strategy. Although we lose some information related to words in orders, this makes it easier to identify commonly used keywords and pattern-recognition tasks.
+
+In `quanteda` you can create a DFM using `dfm()` function. `dfm()` function takes in tokenized objects. Let's look at an example.
+
+```{r}
+# tokenize the corpus
+tok_corp <- tokens(corp,
+                   remove_numbers = TRUE,
+                   remove_punct = TRUE) %>% 
+  tokens_wordstem() %>% 
+  tokens_tolower()
+tok_corp_stopword <- tokens_select(tok_corp,
+                                   stopwords("en"),
+                                   selection = "remove")
+corp_dfm <- dfm(tok_corp_stopword)
+
+corp_dfm
+
+```
+
+We can see that the `dfm` consists of 59 documents (i.e., rows) and 5,451 features (i.e., columns). 5,451 features indicate that there are 5,451 unique words in the data. Usually `dfm` is very sparse (i.e., a LOT of empty cells) because most words do not appear in most of the documents.
+
+## Practice 2
+
+Let's import a data that I found from [Kaggle](https://www.kaggle.com/datasets/mrmars1010/iphone-customer-reviews-nlp/data) about reviews about iPhone on Amazon. Please use the following code retrieve the data.
+
+```{r}
+#| output: false
+
+iphone <- read_csv("https://raw.githubusercontent.com/jwrchoi/nlp_workshop_beacon/refs/heads/main/iphone.csv")
+glimpse(iphone)
+```
+
+The text of the review is available in the column `reviewDescription`. Other columns can become useful in the future, but we will not pay attention to this at this time.
+
+### Construct Corpus
+
+Take the `reviewDescription` column as the text element and construct `quanteda` corpus.
+
+```{r}
+#| code-fold: true
+#| output: false
+iphone_corpus <- corpus(iphone, text_field = "reviewDescription")
+```
+
+### Pre-process Text
+
+Go through (1) tokenization, (2) stopword deletion, and (3) stemming. When tokenizing, remove punctuation, numbers, and symbols. Also, convert the words to lower case.
+
+Finally, convert the object to a document-feature matrix.
+
+```{r}
+#| code-fold: true
+#| output: false
+
+
+# Tokenize using tokens
+iphone_tok <- tokens(iphone_corpus,
+                     remove_punct = TRUE,
+                     remove_numbers = TRUE,
+                     remove_symbols = TRUE)
+# Stopword deletion
+iphone_tok_stop <- tokens_select(iphone_tok,
+                                 stopwords("en"),
+                                 selection = "remove")
+# Stem the tokens ans convert to lower case
+iphone_tok_stop <- iphone_tok_stop %>% 
+  tokens_wordstem() %>% 
+  tokens_tolower()
+
+# Convert to DFM
+iphone_dfm <- dfm(iphone_tok_stop)
+
+iphone_dfm
+
+```
+
+## Exploratory Data Analysis
+
+### Most Frequent Words & World Cloud
+
+The `quanteda.textstats` and `quanteda.textplots` offers various functions that allows you to create highly useful cross tabulations and visualizations.
+
+Let's first take a look at word frequency of the US Presidential Inaugural Address text corpus.
+
+```{r}
+# crosstabs the feature frequencies
+head(textstat_frequency(corp_dfm), 20)
+```
+
+A wordcloud could give you a more intuitive sense.
+
+```{r}
+textplot_wordcloud(corp_dfm, max_words = 200)
+```
+
+You can give this wordcloud an additional layer of information. For instance, if you are interested in the words of certain US President, you can subset the corpus and plot the wordcloud based on the different presidents.
+
+```{r}
+#| warning: false
+#| code-fold: true
+
+# subset the corpus to only include the Presidents Washington, Obama, Trump, and Reagan
+
+corpus(data_corpus_inaugural)
+
+corpus_subset(data_corpus_inaugural,
+              President %in% c("Washington", "Reagan", "Obama", "Trump")) %>% 
+  tokens(remove_punct = TRUE) %>%  # Tokenize
+  tokens_remove(stopwords("en")) %>%  # Remove stopwords
+  tokens_tolower() %>%  # Lowercase
+  dfm() %>% 
+  dfm_group(groups = President) %>%  # Group the document in a dfm by a grouping variable
+  dfm_trim(min_termfreq = 5, verbose = FALSE) %>% 
+  textplot_wordcloud(comparison = TRUE)
+```
+
+### Practice 3
+
+Let's practice and conduct the frequency analysis and create wordcloud visualizations. We will use the iPhone DFM we created before. Please try to do the follwoing:
+
+-   Create a crosstab summarizing the frequencies of words.
+-   Create a word cloud
+-   Create a word cloud wiht a grouping variable: Country
+
+```{r}
+#| code-fold: true
+#| output: false
+head(textstat_frequency(iphone_dfm))
+```
+
+```{r}
+#| code-fold: true
+#| output: false
+textplot_wordcloud(iphone_dfm, max_words = 100)
+```
+
+```{r}
+#| code-fold: true
+#| output: false
+
+corpus(iphone_corpus)
+
+corpus_subset(iphone_corpus,
+              country %in% c("United States", "India")) %>% 
+  tokens(remove_punct = TRUE) %>%  # Tokenize
+  tokens_remove(stopwords("en")) %>%  # Remove stopwords
+  tokens_tolower() %>%  # Lowercase
+  dfm() %>% 
+  dfm_group(groups = country) %>%  # Group the document in a dfm by a grouping variable
+  dfm_trim(min_termfreq = 5, verbose = FALSE) %>% 
+  textplot_wordcloud(comparison = TRUE, max_words = 200)
+```
+
+**What issues do you see??**
+
+# Practice - TikTok Data
+
+Let's try to go through all the process by ourselves using a social media dataset. This dataset contains some information about TikTok videos posted by news organizations.
+
+Conduct the following:
+
+-   Construct a `quanteda` corpus
+-   Pre-process: Tokenize, lower-case, stemming, stopword deletion
+-   Convert to a DFM
+-   Find out the most frequent words
+-   Create a word cloud visualization
+
+```{r}
+# Importing data
+tiktok_dat <- read_csv("https://raw.githubusercontent.com/jwrchoi/nlp_workshop_beacon/refs/heads/main/tiktok_sample.csv")
+```
+
+```{r}
+#| code-fold: true
+#| output: false
+#| warning: false
+
+glimpse(tiktok_dat)
+tiktok_corpus <- corpus(tiktok_dat, text_field = "desc")
+tiktok_tok <- tokens(tiktok_corpus,
+                     remove_punct = TRUE,
+                     remove_url = TRUE,
+                     remove_numbers = TRUE,
+                     remove_symbols = TRUE) %>% 
+  tokens_tolower() %>% tokens_wordstem()
+tiktok_tok_stop <- tokens_select(tiktok_tok,
+                                 stopwords("en"),
+                                 selection = "remove")
+tiktok_dfm <- tiktok_tok_stop %>% dfm()
+
+
+head(textstat_frequency(tiktok_dfm), 30)
+
+textplot_wordcloud(tiktok_dfm, min_count = 500)
+
+```
+
+## kwic
+
+`kwic` is a useful tool to quickly analyze the context in which a word is in. It stands for "KeyWord in Context." This allows you to identify a keyword of interest, and see that word in its context (i.g., 5 words before and after it). Let's see the word "America" in its context using `kwic`. We did not do any text pre-tprocessing, so America should be capitalized. But, if we are dealing with lower-cased dataset, we might as well add the optional argument `case_insensitive` to `TRUE`.
+
+```{r}
+corp <- tokens(corpus(data_corpus_inaugural))
+
+america_kwic <- kwic(corp,
+                     pattern = "America")
+head(america_kwic)
+```

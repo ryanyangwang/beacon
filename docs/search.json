@@ -400,5 +400,85 @@
     "crumbs": [
       "Data visualization"
     ]
+  },
+  {
+    "objectID": "text.html",
+    "href": "text.html",
+    "title": "Intro to Text Analysisin R",
+    "section": "",
+    "text": "Text data is often the most prevalent forms of data available for social scientists. From archival data to social media, text data is an essential part of social scientific inquiries. Text data comes in various shapes and forms including social media posts, comments, profile descriptions, news articles, product reviews, and open-ended survey questions. We will explore the basics of approaching text analysis using computational techniques.\nWe will use stringr for wrangling the text data. Another useful package is glue, which makes interpolating data into strings very easy. The stringr packge is part of tidyverse, which means that if you installed tidyverse, you already have it installed. For further analysis of text data we will use quanteda.\nWe will first explore what text data is, how to pre-process text data, and how to conduct basic text data analysis. But first, let’s load the packages.\nlibrary(tidyverse)\nlibrary(quanteda)\nlibrary(glue)",
+    "crumbs": [
+      "Intro to text analysis"
+    ]
+  },
+  {
+    "objectID": "text.html#text-data-in-r",
+    "href": "text.html#text-data-in-r",
+    "title": "Intro to Text Analysisin R",
+    "section": "Text Data in R",
+    "text": "Text Data in R\nThere are several different data types. In R, we have data types such as integer, numeric, factor, etc. Text data are commonly treated as string or character type. Let’s take a glimpse at how computers understand text as a string of characters.\n\ntext &lt;- \"Hello world!\"\nclass(text)\n\nR recognizes this as a character data type.\n\nlength(text)\n\nLength function returns 1, meaning that the totality of “Hello world!” inside the quotation mark is considered as a single character element. But, one might wonder: isn’t “Hello world!” a collection of alphabets and an exclamation mark? Can we decide length of this character based on that?\n\nstr_length(text)\n\nThis means we can navigate this text based on specific location of a character.\n\nstr_sub(text, 7, 11)\n\nIf you remember concatenation in R, you can turn multiple strings into a list of words.\n\nwords &lt;- c(\"Spring\", \"break\", \"is\", \"coming\")\nclass(words)\n\n\n\n\n\n\n\nNote\n\n\n\nRefresher: You can concatenate numbers and strings together, but the numbers will become characters and will not be treated as numeric variable. See below how 1, 2 becomes “1”, “2”\n\nmixed &lt;- c(1, 2, \"four\", \"five\")\nprint(mixed)\n\n\n\nThe length function will then count the elements in the list words.\n\nlength(words)\n\nThis means you can also access each element with square brackets.\n\n# a glimpse of what glue package can do\nglue(\"words[1]: {words[1]}\", \"\\n\", # \\n is for new line\n     \"words[2]: {words[2]}\")\n\nYou can also join multiple character vectors into one character. Take a look at the str_c function, putting together the words in words list into one character.\n\nsentence &lt;- str_c(words, collapse = \" \") # collapse option specifies the strings you want to use to combine the strings (i.e., what comes between them)\nsentence",
+    "crumbs": [
+      "Intro to text analysis"
+    ]
+  },
+  {
+    "objectID": "text.html#stringr-to-deal-with-text-in-r",
+    "href": "text.html#stringr-to-deal-with-text-in-r",
+    "title": "Intro to Text Analysisin R",
+    "section": "stringr to Deal with Text in R",
+    "text": "stringr to Deal with Text in R\nThe stringr package comes with a wide variety of functions that is highly useful in dealing with text data in R. Below are some functions that are frequently used to navigate through and transform text data in R.\n\n\n\n\n\n\n\nString Operation\nstringr Function\n\n\n\n\nCount characters in s\nstr_length(s)\n\n\nExtract a substring\nstr_sub(s, n1, n2)\n\n\nTest if s contains s2\nstr_detect(s, s2)\n\n\nCount number of matches of s2\nstr_count(s, s2)\n\n\nStrip spaces (at start and end)\ntrimws(s)\n\n\nConvert to lowercase/uppercase\ntolower(s) / toupper(s)\n\n\nFind s1 and replace by s2\nstr_replace(s, s1, s2)\n\n\nTrims repeated whitespaces to one space\nstr_squish(s)\n\n\n\n\ntext &lt;- \"  &lt;p&gt;&lt;h1&gt;Digital Advertising:&lt;/h1&gt; learn Traditional and Digital Ad.  &lt;/p&gt;\"\n\n# Remove HTML tags\nstr_replace_all(text, \"&lt;p&gt;\", \" \")\n\n\n# use piping\nclean_text &lt;- text %&gt;% \n  str_replace_all(\"&lt;h1&gt;\", \"\") %&gt;% \n  str_replace_all(\"&lt;/h1&gt;\", \"\") %&gt;% \n  str_replace_all(\"&lt;/p&gt;\", \"\") %&gt;% \n  str_replace_all(\"&lt;p&gt;\", \"\") %&gt;% \n  # convert to lower case\n  tolower() %&gt;% \n  # trim spaces at the start and end\n  trimws()\n# Result\nclean_text\n\n\nstr_length(clean_text)\n\n\nstr_sub(clean_text, 1, 10)\n\n\nstr_count(clean_text, \"digital\")\n\n\nstr_detect(clean_text, \"traditional\")\n\n\nPractice 1\nUse the code below to install and load Pride & Prejudice from janeaustenr package.\n\nlibrary(janeaustenr)\npride_txt &lt;- prideprejudice\nhead(pride_txt, 20)\n\n\nUse stringr to convert the pride_txt to lower case. Use head function to inspect the first several observations.\n\n\n\nShow the code\nlowertxt &lt;- tolower(pride_txt)\n\nhead(lowertxt, 50)\n\n\n\nUse stringr to replace “mr.” with “mr”. Inspect the difference. Use head function to make it manageable.\n\n\n\nShow the code\nhead(str_replace_all(lowertxt, \"mr.\", \"mr\"), 50)",
+    "crumbs": [
+      "Intro to text analysis"
+    ]
+  },
+  {
+    "objectID": "text.html#tokenization",
+    "href": "text.html#tokenization",
+    "title": "Intro to Text Analysisin R",
+    "section": "Tokenization",
+    "text": "Tokenization\nA central concept that you have to understand when performing computational text analysis or natural language processing (NLP) is tokenization. Computers can’t identify words naturally. Let’s say we have a string, “spring break is almost here.” Computers can’t tell how many words are in this string. In order for a computer to identify words, you ahve to tell it how to “parse” the text. In other words, how to break down a string into its linguistic parts.\nTokenizing is the most common way of parsing text data, where you treat each word as a “token.” It is the process of defining the unit of analysis. You can tokenize sentences, which would result in sentence tokens. In most cases, however, word-level tokenization is used.\nIn quanteda packages, tokens() function is used for tokenization. This function produces object consisting of a list of tokens in the form of character vectors.\n\ntext &lt;- \"Watch your speed while driving in monsoon weather!\"\ntokens(text)\n\nYou can also tokenize a vector of strings.\n\ntexts &lt;- c(\"Watch your speed while driving in monsoon weather!\",\n           \"Winter is coming\")\ntokens(texts)\n\nAs we can see here, tokens() retains everything, including the exclamation mark, by default. When we analyze text in large scale, we usually don’t want to analyze noise caused by punctuation marks or filler words that do not carry meaning. tokens() offer several arguments that are useful in filtering out some of these noises. Some of these common noises we want to discard include punctuation, numbers, symbol, hyphens, etc.\n\ntexts &lt;- c(\n  t1 = \"RT: @john_doe https://example.com/news VERY interesting!\",\n  t2 = \"This is $10 in 999 different ways,\\n up and down; left and right!\",\n  t3 = \"@me and @myself #selfietime\"\n)\n\ntokens(texts)\n\n\ntokens(texts, remove_numbers = TRUE, remove_punct = TRUE)\n\n\ntokens(texts, remove_numbers = FALSE, remove_punct = TRUE)\n\n\ntokens(texts,\n       remove_numbers = TRUE,\n       remove_punct = TRUE,\n       remove_url = TRUE,\n       remove_symbols = TRUE)",
+    "crumbs": [
+      "Intro to text analysis"
+    ]
+  },
+  {
+    "objectID": "text.html#stopwords-stemming-and-lemmatizing",
+    "href": "text.html#stopwords-stemming-and-lemmatizing",
+    "title": "Intro to Text Analysisin R",
+    "section": "Stopwords, Stemming, and Lemmatizing",
+    "text": "Stopwords, Stemming, and Lemmatizing\nWe started to touch upon some basic text data cleaning. In addition to numbers or punctuation, one of the first steps in NLP processing is to remove words that do not contain much information, but occur frequently. For instance, words such as “a” or “the” occur frequently but rarely carry any meaning. To achieve this, we use stopword lists, or lists of words we want to exclude from our analysis. quanteda comes with predefined stopwords for many languages. You can access them through the stopwords() function. See the stopword page for more details about available languages.\n\nhead(stopwords(\"en\"), 20)\n\n\nhead(stopwords(\"korean\", source = \"marimo\"), 20)\n\nTo delete the stopwords, we can use tokens_select() with the following arguments.\n\n# Save the tokenized item\ntxt_tokens &lt;- tokens(texts,\n                     remove_numbers = TRUE,\n                     remove_punct = TRUE,\n                     remove_url = TRUE,\n                     remove_symbols = TRUE) %&gt;% \n  tokens_tolower()\n# Remove the stopwords\ntxt_tokens_clean &lt;- tokens_select(txt_tokens,\n                                  stopwords(\"en\"),\n                                  selection = \"remove\")\ntxt_tokens_clean\n\n\n\n\n\n\n\nNote\n\n\n\nSometimes, stopwords require closer attention. For instance, consider the word “will.” “Will” can be considered a stop word as an auxiliary verb. However, it can also be a noun (a testament) or a name (Will). If your research questions require a certain stop words, you can customize your own stop word lists.\n\n\nAnother text pre-processing considerations we should focus on are stemming and lemmatization. From my personal perspective, these are the processes similar to “standardizing” different versions of words. Stemming is the process of removing stems (suffixes and prefixes) from a word. This helps us consolidate words like “immigration,” “immigrating,” and “immigrants” into one root word “immigra.” We can use the tokens_wordstem() function to do stemming.\n\ntxt &lt;- c(one = \"eating eater eaters eats ate\",\n         two = \"taxing taxes taxed my tax return\")\ntokens(txt) %&gt;% \n  tokens_wordstem()\n\nYou notice that this made the overall number of tokens gets smaller and manageable. However, you also notice that “ate” was not collapsed into the “eat” stem. To do this, we need a more advanced approach called lemmatization. It is better at finding meaningful words/representation, but is computationally expensive. See below for the comparison.\n\n\n\n\n\n\n\nStemming\nLemmatization\n\n\n\n\nStemming is a process that stems or removes last few characters from a word, often leading to incorrect meanings and spelling.\nLemmatization considers the context and converts the word to its meaningful base form, which is called Lemma.\n\n\nExample: stemming the word ‘Caring’ would return ‘Car’.\nExample: lemmatizing the word ‘Caring’ would return ‘Care’.\n\n\nStemming is used in case of large dataset where performance is an issue.\nLemmatization is computationally expensive since it involves look-up tables and what not.\n\n\n\nTo lemmatize your tokens using quanteda, you need to access separate lemma tables and replace your tokens using tokens_replace()\n\ntokens_replace(tokens(txt),\n               pattern = lexicon::hash_lemmas$token,\n               replacement = lexicon::hash_lemmas$lemma)",
+    "crumbs": [
+      "Intro to text analysis"
+    ]
+  },
+  {
+    "objectID": "text.html#practice-2",
+    "href": "text.html#practice-2",
+    "title": "Intro to Text Analysisin R",
+    "section": "Practice 2",
+    "text": "Practice 2\nLet’s import a data that I found from Kaggle about reviews about iPhone on Amazon. Please use the following code retrieve the data.\n\niphone &lt;- read_csv(\"https://raw.githubusercontent.com/jwrchoi/nlp_workshop_beacon/refs/heads/main/iphone.csv\")\nglimpse(iphone)\n\nThe text of the review is available in the column reviewDescription. Other columns can become useful in the future, but we will not pay attention to this at this time.\n\nConstruct Corpus\nTake the reviewDescription column as the text element and construct quanteda corpus.\n\n\nCode\niphone_corpus &lt;- corpus(iphone, text_field = \"reviewDescription\")\n\n\n\n\nPre-process Text\nGo through (1) tokenization, (2) stopword deletion, and (3) stemming. When tokenizing, remove punctuation, numbers, and symbols. Also, convert the words to lower case.\nFinally, convert the object to a document-feature matrix.\n\n\nCode\n# Tokenize using tokens\niphone_tok &lt;- tokens(iphone_corpus,\n                     remove_punct = TRUE,\n                     remove_numbers = TRUE,\n                     remove_symbols = TRUE)\n# Stopword deletion\niphone_tok_stop &lt;- tokens_select(iphone_tok,\n                                 stopwords(\"en\"),\n                                 selection = \"remove\")\n# Stem the tokens ans convert to lower case\niphone_tok_stop &lt;- iphone_tok_stop %&gt;% \n  tokens_wordstem() %&gt;% \n  tokens_tolower()\n\n# Convert to DFM\niphone_dfm &lt;- dfm(iphone_tok_stop)\n\niphone_dfm",
+    "crumbs": [
+      "Intro to text analysis"
+    ]
+  },
+  {
+    "objectID": "text.html#exploratory-data-analysis",
+    "href": "text.html#exploratory-data-analysis",
+    "title": "Intro to Text Analysisin R",
+    "section": "Exploratory Data Analysis",
+    "text": "Exploratory Data Analysis\n\nMost Frequent Words & World Cloud\nThe quanteda.textstats and quanteda.textplots offers various functions that allows you to create highly useful cross tabulations and visualizations.\nLet’s first take a look at word frequency of the US Presidential Inaugural Address text corpus.\n\n# crosstabs the feature frequencies\nhead(textstat_frequency(corp_dfm), 20)\n\nA wordcloud could give you a more intuitive sense.\n\ntextplot_wordcloud(corp_dfm, max_words = 200)\n\nYou can give this wordcloud an additional layer of information. For instance, if you are interested in the words of certain US President, you can subset the corpus and plot the wordcloud based on the different presidents.\n\n\nCode\n# subset the corpus to only include the Presidents Washington, Obama, Trump, and Reagan\n\ncorpus(data_corpus_inaugural)\n\ncorpus_subset(data_corpus_inaugural,\n              President %in% c(\"Washington\", \"Reagan\", \"Obama\", \"Trump\")) %&gt;% \n  tokens(remove_punct = TRUE) %&gt;%  # Tokenize\n  tokens_remove(stopwords(\"en\")) %&gt;%  # Remove stopwords\n  tokens_tolower() %&gt;%  # Lowercase\n  dfm() %&gt;% \n  dfm_group(groups = President) %&gt;%  # Group the document in a dfm by a grouping variable\n  dfm_trim(min_termfreq = 5, verbose = FALSE) %&gt;% \n  textplot_wordcloud(comparison = TRUE)\n\n\n\n\nPractice 3\nLet’s practice and conduct the frequency analysis and create wordcloud visualizations. We will use the iPhone DFM we created before. Please try to do the follwoing:\n\nCreate a crosstab summarizing the frequencies of words.\nCreate a word cloud\nCreate a word cloud wiht a grouping variable: Country\n\n\n\nCode\nhead(textstat_frequency(iphone_dfm))\n\n\n\n\nCode\ntextplot_wordcloud(iphone_dfm, max_words = 100)\n\n\n\n\nCode\ncorpus(iphone_corpus)\n\ncorpus_subset(iphone_corpus,\n              country %in% c(\"United States\", \"India\")) %&gt;% \n  tokens(remove_punct = TRUE) %&gt;%  # Tokenize\n  tokens_remove(stopwords(\"en\")) %&gt;%  # Remove stopwords\n  tokens_tolower() %&gt;%  # Lowercase\n  dfm() %&gt;% \n  dfm_group(groups = country) %&gt;%  # Group the document in a dfm by a grouping variable\n  dfm_trim(min_termfreq = 5, verbose = FALSE) %&gt;% \n  textplot_wordcloud(comparison = TRUE, max_words = 200)\n\n\nWhat issues do you see??",
+    "crumbs": [
+      "Intro to text analysis"
+    ]
+  },
+  {
+    "objectID": "text.html#kwic",
+    "href": "text.html#kwic",
+    "title": "Intro to Text Analysisin R",
+    "section": "kwic",
+    "text": "kwic\nkwic is a useful tool to quickly analyze the context in which a word is in. It stands for “KeyWord in Context.” This allows you to identify a keyword of interest, and see that word in its context (i.g., 5 words before and after it). Let’s see the word “America” in its context using kwic. We did not do any text pre-tprocessing, so America should be capitalized. But, if we are dealing with lower-cased dataset, we might as well add the optional argument case_insensitive to TRUE.\n\ncorp &lt;- tokens(corpus(data_corpus_inaugural))\n\namerica_kwic &lt;- kwic(corp,\n                     pattern = \"America\")\nhead(america_kwic)\n\n\n\n\nTypical Text Analysis Workflow (Source: Text Mining with R: A Tidy Approach)",
+    "crumbs": [
+      "Intro to text analysis"
+    ]
   }
 ]
